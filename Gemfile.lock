@@ -70,8 +70,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
     annotate (2.7.1)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 12.0)
@@ -81,6 +79,8 @@ GEM
     bindex (0.5.0)
     brakeman (3.6.1)
     builder (3.2.3)
+    codeclimate-test-reporter (1.0.7)
+      simplecov
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -91,8 +91,6 @@ GEM
     commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
-    crack (0.4.3)
-      safe_yaml (~> 1.0.0)
     database_cleaner (1.5.3)
     devise (4.2.1)
       bcrypt (~> 3.0)
@@ -111,7 +109,6 @@ GEM
       thor (~> 0.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    hashdiff (0.3.2)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.8.1)
@@ -151,7 +148,6 @@ GEM
       activesupport (>= 4.2)
       arel (>= 6)
     powerpack (0.1.1)
-    public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.1)
     rack-protection (1.5.3)
@@ -219,7 +215,6 @@ GEM
       builder (< 4)
       rspec-core (>= 2, < 4, != 2.12.0)
     ruby-progressbar (1.8.1)
-    safe_yaml (1.0.4)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     sidekiq (4.2.10)
@@ -251,7 +246,6 @@ GEM
     uglifier (3.1.11)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.1.3)
-    vcr (3.0.3)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.0)
@@ -259,10 +253,6 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webmock (2.3.2)
-      addressable (>= 2.3.6)
-      crack (>= 0.3.2)
-      hashdiff
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -274,6 +264,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   brakeman
+  codeclimate-test-reporter
   coffee-rails
   database_cleaner
   devise
@@ -300,9 +291,7 @@ DEPENDENCIES
   simplecov
   therubyracer
   uglifier
-  vcr
   web-console
-  webmock
   yui-compressor
 
 RUBY VERSION

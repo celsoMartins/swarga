@@ -32,6 +32,7 @@ group :test, :development do
   gem 'faker'
   gem 'rubocop', git: 'git@github.com:bbatsov/rubocop.git', branch: 'master'
   gem 'simplecov', require: false
+  gem 'codeclimate-test-reporter', require: nil
   gem 'parser'
   gem 'brakeman'
 end
@@ -42,8 +43,6 @@ group :development do
 end
 
 group :test do
-  gem 'webmock'
-  gem 'vcr'
   gem 'rspec_junit_formatter'
   gem 'rails-controller-testing'
 end

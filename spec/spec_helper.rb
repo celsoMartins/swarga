@@ -12,12 +12,6 @@ SimpleCov.start 'rails' do
 end
 SimpleCov.command_name 'RSpec'
 
-unless ENV['CIRCLE_BRANCH'].nil?
-  require 'codeclimate-test-reporter'
-  ENV['CODECLIMATE_REPO_TOKEN'] = '8ba7be48e9cdca646e8f031c2264d2c403d532e1020ae463bad4e68c81e67b23'
-  CodeClimate::TestReporter.start
-end
-
 if ENV['CIRCLE_ARTIFACTS']
   dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
   SimpleCov.coverage_dir(dir)
@@ -28,8 +22,6 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'rspec/collection_matchers'
-require 'webmock/rspec'
-require 'vcr'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
