@@ -1,0 +1,26 @@
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git push git@heroku.com:staging-swarga.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app staging-swarga --exit-code
+      - git fetch | git log origin/master..origin/$CIRCLE_BRANCH --no-merges --pretty=format:%s | sort | uniq | xargs -I :commit echo ":commit" | tee $CIRCLE_ARTIFACTS/commits.txt
+  production:
+    branch: master
+    commands:
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git push git@heroku.com:swarga.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app swarga --exit-code
+      - git fetch | git log origin/master..origin/$CIRCLE_BRANCH --no-merges --pretty=format:%s | sort | uniq | xargs -I :commit echo ":commit" | tee $CIRCLE_ARTIFACTS/commits.txt
+dependencies:
+  pre:
+    - gem update --system
+    - gem install bundler
+test:
+  override:
+    - bundle exec rspec --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec/junit.xml --format html -o $CIRCLE_ARTIFACTS/specs_report.html
+  post:
+    - bundle exec rubocop -R
+    - bundle exec brakeman -z
+    - bundle exec rake assets:precompile
