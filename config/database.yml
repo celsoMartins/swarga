@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: swarga_development
+
+test:
+  <<: *default
+  database: swarga_test
+
+production:
+  <<: *default
+  database: swarga_production
+  username: swarga
+  password: <%= ENV['SWARGA_DATABASE_PASSWORD'] %>
