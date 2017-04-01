@@ -23,4 +23,8 @@ class Person < ApplicationRecord
   belongs_to :camping_group
 
   validates :first_name, :last_name, :camping_group, presence: true
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

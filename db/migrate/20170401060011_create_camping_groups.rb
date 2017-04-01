@@ -8,8 +8,8 @@ class CreateCampingGroups < ActiveRecord::Migration[5.0]
       t.date :start_date, null: false
       t.date :end_date, null: false
 
-      t.monetize :price_per_person
-      t.monetize :price_total
+      t.decimal :price_per_person
+      t.decimal :price_total
 
       t.timestamps
     end

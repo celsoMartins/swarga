@@ -56,10 +56,8 @@ CREATE TABLE camping_groups (
     status integer DEFAULT 0 NOT NULL,
     start_date date NOT NULL,
     end_date date NOT NULL,
-    price_per_person_centavos integer DEFAULT 0 NOT NULL,
-    price_per_person_currency character varying DEFAULT 'BRL'::character varying NOT NULL,
-    price_total_centavos integer DEFAULT 0 NOT NULL,
-    price_total_currency character varying DEFAULT 'BRL'::character varying NOT NULL,
+    price_per_person numeric,
+    price_total numeric,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

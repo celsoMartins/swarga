@@ -60,11 +60,20 @@ pt-BR:
       user:
         one: Usuários
         other: Usuário
+      camping_group:
+        one: Grupo de camping
+        other: Grupos de camping
     attributes:
       user:
-        first_name: Primeiro Nome
+        first_name: Nome
         last_name: Sobrenome
         email: Email
         password: Senha
         password_confirmation: Confirmação de senha
         remember_me: Lembrar
+      camping_group:
+        tent_number: Número da barraca
+        price_per_person: Preço por pessoa
+        price_total: Preço total
+        start_date: Data de entrada
+        end_date: Data de saída

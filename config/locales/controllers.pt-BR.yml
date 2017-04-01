@@ -19,3 +19,12 @@ pt-BR:
     logout: Sair
     sign_up: Cadastre-se
     login: Login
+  camping_groups:
+    index:
+      title: "Listagem de grupos de camping"
+      active:
+        title: "Grupos ativos"
+      people_count:
+        title: "Qtd pessoas"
+      vehicle_count:
+        title: "Qtd de veículos"

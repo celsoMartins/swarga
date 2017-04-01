@@ -4,17 +4,15 @@
 #
 # Table name: camping_groups
 #
-#  created_at                :datetime         not null
-#  end_date                  :date             not null
-#  id                        :integer          not null, primary key
-#  price_per_person_centavos :integer          default(0), not null
-#  price_per_person_currency :string           default("BRL"), not null
-#  price_total_centavos      :integer          default(0), not null
-#  price_total_currency      :string           default("BRL"), not null
-#  start_date                :date             not null
-#  status                    :integer          default(0), not null
-#  tent_number               :integer          not null
-#  updated_at                :datetime         not null
+#  created_at       :datetime         not null
+#  end_date         :date             not null
+#  id               :integer          not null, primary key
+#  price_per_person :decimal(, )
+#  price_total      :decimal(, )
+#  start_date       :date             not null
+#  status           :integer          default("reserved"), not null
+#  tent_number      :integer          not null
+#  updated_at       :datetime         not null
 #
 
 class CampingGroup < ApplicationRecord

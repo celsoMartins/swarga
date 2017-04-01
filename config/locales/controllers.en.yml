@@ -20,3 +20,12 @@ en:
     explore: Explore
     sign_up: Register
     login: Login
+  camping_groups:
+    index:
+      title: "Camping groups list"
+      active:
+        title: "Active groups"
+      people_count:
+        title: "Qty people"
+      vehicle_count:
+        title: "Qty vehicles"
