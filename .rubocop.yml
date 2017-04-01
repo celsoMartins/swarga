@@ -30,18 +30,10 @@ Style/AsciiComments:
 Rails/HasAndBelongsToMany:
   Enabled: false
 
-Rails/SkipsModelValidations:
-  Exclude:
-    - 'app/controllers/lists_controller.rb'
-    - 'app/controllers/stages_controller.rb'
-
 Metrics/MethodLength:
   Exclude:
     - 'app/routes/**/*'
     - 'db/migrate/**/*'
-    - 'app/controllers/base_report_controller.rb'
-    - 'app/repositories/weekly_digest_repository.rb'
-    - 'app/adapters/card_adapter.rb'
   Max: 15
 
 Metrics/BlockLength:
@@ -50,36 +42,21 @@ Metrics/BlockLength:
     - 'db/migrate/**/*'
     - 'spec/**/*'
     - 'config/routes.rb'
+    - 'lib/tasks/auto_annotate_models.rake'
 
 Metrics/CyclomaticComplexity:
   Exclude:
-#    - 'db/migrate/**/*'
     - 'app/controllers/base_report_controller.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:
-#    - 'db/migrate/**/*'
     - 'app/controllers/base_report_controller.rb'
 
 Metrics/AbcSize:
   Exclude:
     - 'app/routes/**/*'
     - 'db/migrate/**/*'
-    - 'app/controllers/base_report_controller.rb'
-    - 'app/services/card_service.rb'
-    - 'app/repositories/weekly_digest_repository.rb'
-    - 'app/jobs/update_legacy_digest_job.rb'
-    - 'app/controllers/reports_controller.rb'
-    - 'app/adapters/card_adapter.rb'
-    - 'app/services/report_data_converter.rb'
   Max: 17.5
-
-# TODO: we have to check the responsabilities of this controller and refactor it maybe
-Metrics/ClassLength:
-  Exclude:
-    - 'app/controllers/cards_controller.rb'
-    - 'app/controllers/reports_controller.rb'
-  Max: 110
 
 Metrics/ParameterLists:
   Enabled: false

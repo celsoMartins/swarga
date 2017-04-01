@@ -32,7 +32,7 @@ group :test, :development do
   gem 'faker'
   gem 'rubocop', git: 'git@github.com:bbatsov/rubocop.git', branch: 'master'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'parser'
   gem 'brakeman'
 end

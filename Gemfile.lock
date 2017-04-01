@@ -264,7 +264,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   brakeman
-  codeclimate-test-reporter
+  codeclimate-test-reporter (~> 1.0.0)
   coffee-rails
   database_cleaner
   devise
