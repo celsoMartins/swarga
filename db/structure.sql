@@ -47,6 +47,80 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: camping_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE camping_groups (
+    id integer NOT NULL,
+    tent_number integer NOT NULL,
+    status integer DEFAULT 0 NOT NULL,
+    start_date date NOT NULL,
+    end_date date NOT NULL,
+    price_per_person_centavos integer DEFAULT 0 NOT NULL,
+    price_per_person_currency character varying DEFAULT 'BRL'::character varying NOT NULL,
+    price_total_centavos integer DEFAULT 0 NOT NULL,
+    price_total_currency character varying DEFAULT 'BRL'::character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: camping_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE camping_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: camping_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE camping_groups_id_seq OWNED BY camping_groups.id;
+
+
+--
+-- Name: people; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE people (
+    id integer NOT NULL,
+    camping_group_id integer NOT NULL,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
+    document character varying,
+    phone character varying,
+    price_policy integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE people_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: people_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE people_id_seq OWNED BY people.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -99,10 +173,64 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: vehicles; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE vehicles (
+    id integer NOT NULL,
+    camping_group_id integer NOT NULL,
+    license_plate character varying NOT NULL,
+    vehicle_type integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: vehicles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE vehicles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: vehicles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE vehicles_id_seq OWNED BY vehicles.id;
+
+
+--
+-- Name: camping_groups id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY camping_groups ALTER COLUMN id SET DEFAULT nextval('camping_groups_id_seq'::regclass);
+
+
+--
+-- Name: people id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people ALTER COLUMN id SET DEFAULT nextval('people_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: vehicles id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY vehicles ALTER COLUMN id SET DEFAULT nextval('vehicles_id_seq'::regclass);
 
 
 --
@@ -111,6 +239,22 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: camping_groups camping_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY camping_groups
+    ADD CONSTRAINT camping_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: people people_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT people_pkey PRIMARY KEY (id);
 
 
 --
@@ -130,6 +274,14 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: vehicles vehicles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY vehicles
+    ADD CONSTRAINT vehicles_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -144,12 +296,31 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: vehicles fk_rails_960012dc0d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY vehicles
+    ADD CONSTRAINT fk_rails_960012dc0d FOREIGN KEY (camping_group_id) REFERENCES camping_groups(id);
+
+
+--
+-- Name: people fk_rails_e675cba1cd; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY people
+    ADD CONSTRAINT fk_rails_e675cba1cd FOREIGN KEY (camping_group_id) REFERENCES camping_groups(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES
-('20170401035341');
+('20170401035341'),
+('20170401060011'),
+('20170401061026'),
+('20170401061313');
 
 

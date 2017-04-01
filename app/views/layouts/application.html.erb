@@ -13,12 +13,16 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+
     <section class="alerts">
       <%= notice %>
       <%= alert %>
       <%= error %>
     </section>
+
     <%= yield %>
+
     <%= render 'layouts/footer' %>
   </body>
 </html>
