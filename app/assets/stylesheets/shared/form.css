@@ -1,20 +1,27 @@
 .swarga-form {
-  background-color: #f3f6fc;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 10px;
+    background-color: #f3f6fc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 .help-block {
-  margin-bottom: 0;
+    margin-bottom: 0;
 
-  font-size: 1.2rem;
-  text-align: left;
+    font-size: 1.2rem;
+    text-align: left;
 }
 
 .has-error {
-  input {
     border: 2px solid lighten(#EE1C3A, 10%) !important;
     box-shadow: none;
-  }
+}
+
+.no-data {
+    font-style: italic;
+}
+
+.header-link {
+    text-align: right;
+    text-transform: uppercase;
 }

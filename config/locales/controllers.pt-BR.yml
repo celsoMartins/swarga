@@ -22,12 +22,15 @@ pt-BR:
   camping_groups:
     index:
       title: "Listagem de grupos de camping"
-      active:
-        title: "Grupos ativos"
       people_count:
         title: "Qtd pessoas"
       vehicle_count:
         title: "Qtd de veículos"
+      reserved:
+        title: "Grupos reservados"
+      paid:
+        title: "Grupos pagos"
+      empty_message: "Não há grupos de camping deste tipo cadastrados."
     new:
       title: "Novo Grupo de Camping"
       main_form:
@@ -38,6 +41,9 @@ pt-BR:
         title: "Veículo"
     show:
       title: "Detalhes para Grupo de Camping"
+    pay_it:
+      success:
+        message: "Grupo marcado como PAGO."
   vehicles:
     index:
       title: "Veículos"

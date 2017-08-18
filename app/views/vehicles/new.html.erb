@@ -1,7 +1,14 @@
+
 <div class="container">
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-3 swarga-form">
-      <h2><%= t('camping_groups.new.responsible.title') %></h2>
+    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+      <h1><%= t('vehicles.new.title') %></h1>
+      <span><%= link_to '< Voltar', camping_group_path(@camping_group) %></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 swarga-form">
       <%= render 'form' %>
     </div>
   </div>
