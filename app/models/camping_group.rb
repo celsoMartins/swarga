@@ -11,18 +11,23 @@
 #  price_total      :decimal(, )
 #  start_date       :date             not null
 #  status           :integer          default("reserved"), not null
-#  tent_number      :integer          not null
+#  tent_numbers     :integer          not null, is an Array
 #  updated_at       :datetime         not null
 #
 
 class CampingGroup < ApplicationRecord
   enum status: { reserved: 0, paid: 1, left: 2 }
 
-  has_many :people
-  accepts_nested_attributes_for :people, reject_if: :all_blank, allow_destroy: true
+  has_many :people, dependent: :restrict_with_exception
+  has_many :vehicles, dependent: :restrict_with_exception
 
-  has_many :vehicles
-  accepts_nested_attributes_for :vehicles, reject_if: :all_blank, allow_destroy: true
+  validates :tent_numbers, :start_date, :end_date, presence: true
 
-  validates :tent_number, :start_date, :end_date, presence: true
+  def calculated_total
+    price_per_person * people.count
+  end
+
+  def qty_people
+    people.count
+  end
 end

@@ -2,8 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-gem 'rails', '5.0.1'
-gem 'less-rails', git: 'https://github.com/metaskills/less-rails'
+gem 'rails', '5.0.3'
 gem 'uglifier'
 gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails'

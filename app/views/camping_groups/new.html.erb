@@ -14,25 +14,6 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-6 col-xs-offset-3 swarga-form">
-          <h2><%= t('camping_groups.new.responsible.title') %></h2>
-          <%= f.fields_for :people do |person_form| %>
-              <%= render 'person_form', f: person_form %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-6 col-xs-offset-3 swarga-form">
-          <h2><%= t('camping_groups.new.vehicle.title') %></h2>
-
-          <%= f.fields_for :vehicle do |vehicle_form| %>
-              <%= render 'vehicle_form', f: vehicle_form %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
           <%= f.submit class: 'btn btn-success' %>
         </div>

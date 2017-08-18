@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'devise_custom/registrations' }
 
-  resources :camping_groups, only: %i(index new create)
+  resources :camping_groups, only: %i[index new create]
 
   root 'camping_groups#index'
 end

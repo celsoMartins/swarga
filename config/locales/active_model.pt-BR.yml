@@ -78,7 +78,7 @@ pt-BR:
         password_confirmation: Confirmação de senha
         remember_me: Lembrar
       camping_group:
-        tent_number: Número da barraca
+        tent_numbers: Números das barracas
         price_per_person: Preço por pessoa
         price_total: Preço total
         start_date: Data de entrada
