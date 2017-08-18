@@ -2,7 +2,8 @@
 
 class CampingGroupsController < AuthenticatedController
   def index
-    @active_camping_groups = CampingGroup.paid.or(CampingGroup.reserved).order(:end_date)
+    @reserved_camping_groups = CampingGroup.reserved.order(:end_date)
+    @paid_camping_groups = CampingGroup.paid.order(:end_date)
   end
 
   def new
@@ -17,6 +18,12 @@ class CampingGroupsController < AuthenticatedController
 
   def show
     @camping_group = CampingGroup.find(params[:id])
+  end
+
+  def pay_it
+    @camping_group = CampingGroup.find(params[:id])
+    @camping_group.paid!
+    redirect_to camping_groups_path, notice: t('camping_groups.pay_it.success.message')
   end
 
   private

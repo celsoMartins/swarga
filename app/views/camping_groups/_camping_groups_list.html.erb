@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1 swarga-form">
+    <h2><%= list_title %></h2>
+    <% if camping_groups.empty? %>
+        <span class="no-data"><%= t('camping_groups.index.empty_message') %></span>
+    <% else %>
+        <table class="table">
+          <th><%= CampingGroup.human_attribute_name(:tent_numbers) %></th>
+          <th><%= t('camping_groups.index.people_count.title') %></th>
+          <th><%= CampingGroup.human_attribute_name(:price_per_person) %></th>
+          <th><%= CampingGroup.human_attribute_name(:price_total) %></th>
+          <th><%= CampingGroup.human_attribute_name(:start_date) %></th>
+          <th><%= CampingGroup.human_attribute_name(:end_date) %></th>
+          <th>#</th>
+          <tbody>
+          <% camping_groups.each do |camping_group| %>
+              <tr>
+                <td><%= link_to camping_group.tent_numbers.join(', '), camping_group_path(camping_group) %></td>
+                <td><%= camping_group.people.count %></td>
+                <td><%= number_to_currency camping_group.price_per_person %></td>
+                <td><%= number_to_currency(camping_group.price_total || camping_group.calculated_total) %></td>
+                <td><%= l(camping_group.start_date) %></td>
+                <td><%= l(camping_group.end_date, format: :long) %></td>
+                <td>
+                  <%= link_to camping_group_path(camping_group) do %>
+                      <i class="fa fa-eye fa-2x"></i>
+                  <% end %>
+                  <% if camping_group.reserved? %>
+                      <%= link_to pay_it_camping_group_path(camping_group), method: :patch do %>
+                          <i class="fa fa-credit-card fa-2x"></i>
+                      <% end %>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+    <% end %>
+  </div>
+</div>

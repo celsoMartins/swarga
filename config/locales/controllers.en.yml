@@ -29,6 +29,11 @@ en:
         title: "Qty people"
       vehicle_count:
         title: "Qty vehicles"
+      reserved:
+        title: "Reserved Groups"
+      paid:
+        title: "Paid Groups"
+      empty_message: "No camping groups on this type."
     new:
       title: "New camping group"
       main_form:
@@ -39,6 +44,9 @@ en:
         title: "Vehicle"
     show:
       title: "Details for Camping Group"
+    pay_it:
+      success:
+        message: "Group paid."
   vehicles:
     index:
       title: "Vehicles"
