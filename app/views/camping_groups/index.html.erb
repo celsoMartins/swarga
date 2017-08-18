@@ -9,6 +9,7 @@
     </div>
   </div>
 
+  <%= render 'camping_groups_list', camping_groups: @last_day_camping_groups, list_title: t('camping_groups.index.leaving_today.title') %>
   <%= render 'camping_groups_list', camping_groups: @reserved_camping_groups, list_title: t('camping_groups.index.reserved.title') %>
   <%= render 'camping_groups_list', camping_groups: @paid_camping_groups, list_title: t('camping_groups.index.paid.title') %>
 </div>
