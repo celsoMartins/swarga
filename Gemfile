@@ -18,8 +18,6 @@ gem 'figaro'
 
 gem 'httparty'
 
-gem 'money-rails', git: 'https://github.com/RubyMoney/money-rails'
-
 gem 'sidekiq'
 
 group :test, :development do
