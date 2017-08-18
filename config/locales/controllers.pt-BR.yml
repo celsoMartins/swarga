@@ -36,3 +36,10 @@ pt-BR:
         title: "Responsável"
       vehicle:
         title: "Veículo"
+    show:
+      title: "Detalhes para Grupo de Camping"
+  vehicles:
+    index:
+      title: "Veículos"
+    new:
+      title: "Novo Veículo"

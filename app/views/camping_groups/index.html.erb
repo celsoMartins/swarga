@@ -21,17 +21,23 @@
         <th><%= CampingGroup.human_attribute_name(:price_total) %></th>
         <th><%= CampingGroup.human_attribute_name(:start_date) %></th>
         <th><%= CampingGroup.human_attribute_name(:end_date) %></th>
+        <th>#</th>
         <tbody>
         <% @active_camping_groups.each do |camping_group| %>
-            <tr>
-              <td><%= camping_group.tent_numbers.join(', ') %></td>
-              <td><%= camping_group.people.count %></td>
-              <td><%= camping_group.vehicles.count %></td>
-              <td><%= number_to_currency camping_group.price_per_person %></td>
-              <td><%= number_to_currency(camping_group.price_total || camping_group.calculated_total) %></td>
-              <td><%= l(camping_group.start_date) %></td>
-              <td><%= l(camping_group.end_date, format: :long) %></td>
-            </tr>
+                <tr>
+                  <td><%= link_to camping_group.tent_numbers.join(', '), camping_group_path(camping_group) %></td>
+                  <td><%= camping_group.people.count %></td>
+                  <td><%= camping_group.vehicles.count %></td>
+                  <td><%= number_to_currency camping_group.price_per_person %></td>
+                  <td><%= number_to_currency(camping_group.price_total || camping_group.calculated_total) %></td>
+                  <td><%= l(camping_group.start_date) %></td>
+                  <td><%= l(camping_group.end_date, format: :long) %></td>
+                  <td>
+                    <%= link_to camping_group_path(camping_group) do %>
+                        <i class="fa fa-eye fa-2x"></i>
+                    <% end %>
+                  </td>
+                </tr>
         <% end %>
         </tbody>
       </table>

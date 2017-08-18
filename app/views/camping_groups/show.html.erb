@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 swarga-form">
+      <h1>
+        <%= t('camping_groups.show.title') %>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 swarga-form">
+      <h2><%= t('vehicles.index.title') %></h2>
+      <table class="table">
+        <th><%= Vehicle.human_attribute_name(:license_plate) %></th>
+        <th><%= Vehicle.human_attribute_name(:vehicle_type) %></th>
+        <tbody>
+        <% @camping_group.vehicles.each do |vehicle| %>
+            <tr>
+              <td><%= vehicle.license_plate %></td>
+              <td><%= t("activerecord.attributes.vehicle.enums.vehicle_types.#{vehicle.vehicle_type}") %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to t('vehicles.new.title'), new_camping_group_vehicle_path(@camping_group), class: 'btn btn-sm btn-primary' %>
+    </div>
+  </div>
+</div>

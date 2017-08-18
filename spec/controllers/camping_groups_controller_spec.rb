@@ -14,6 +14,10 @@ RSpec.describe CampingGroupsController, type: :controller do
       before { post :create }
       it { expect(response).to redirect_to new_user_session_path }
     end
+    describe 'GET #show' do
+      before { get :show, params: { id: 'foo' } }
+      it { expect(response).to redirect_to new_user_session_path }
+    end
   end
 
   context 'authenticated' do
@@ -68,6 +72,22 @@ RSpec.describe CampingGroupsController, type: :controller do
           expect(CampingGroup.last).to be_nil
           expect(assigns(:new_camping_group).errors.full_messages).to eq ['Números das barracas não pode ficar em branco', 'Data de entrada não pode ficar em branco', 'Data de saída não pode ficar em branco']
         end
+      end
+    end
+
+    describe 'GET #show' do
+      context 'with valid parameters' do
+        let!(:camping_group) { Fabricate :camping_group }
+        it 'creates the camping group as reserved and redirects to index' do
+          get :show, params: { id: camping_group }
+          expect(response).to render_template :show
+          expect(assigns(:camping_group)).to eq camping_group
+        end
+      end
+
+      context 'with an invalid ID' do
+        before { get :show, params: { id: 'foo' } }
+        it { expect(response).to be_not_found }
       end
     end
   end

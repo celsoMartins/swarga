@@ -37,3 +37,10 @@ en:
         title: "Responsible"
       vehicle:
         title: "Vehicle"
+    show:
+      title: "Details for Camping Group"
+  vehicles:
+    index:
+      title: "Vehicles"
+    new:
+      title: "New Vehicle"

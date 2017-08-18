@@ -1,4 +1,4 @@
-<%= form_for @vehicle do |f| %>
+<%= form_for @new_vehicle, url: camping_group_vehicles_path(@camping_group) do |f| %>
     <div class="row">
       <div class='col-xs-12'>
         <div class="row">
@@ -14,6 +14,12 @@
             <%= f.text_field :license_plate, class: 'form-control' %>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <%= f.submit t('general.buttons.save'), class: 'btn btn-success' %>
       </div>
     </div>
 <% end %>
