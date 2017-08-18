@@ -22,6 +22,10 @@ RSpec.describe CampingGroupsController, type: :controller do
       before { patch :pay_it, params: { id: 'foo' } }
       it { expect(response).to redirect_to new_user_session_path }
     end
+    describe 'PATCH #mark_exit' do
+      before { patch :mark_exit, params: { id: 'foo' } }
+      it { expect(response).to redirect_to new_user_session_path }
+    end
   end
 
   context 'authenticated' do
@@ -39,6 +43,7 @@ RSpec.describe CampingGroupsController, type: :controller do
         it 'assigns the instance variable and renders template' do
           get :index
           expect(response).to render_template :index
+          expect(assigns[:left_camping_groups]).to eq [fourth_camping_group]
           expect(assigns[:last_day_camping_groups]).to eq [second_camping_group]
           expect(assigns[:reserved_camping_groups]).to eq [third_camping_group]
           expect(assigns[:paid_camping_groups]).to eq [second_camping_group, first_camping_group]
@@ -101,7 +106,7 @@ RSpec.describe CampingGroupsController, type: :controller do
     describe 'PATCH #pay_it' do
       context 'with valid parameters' do
         let!(:camping_group) { Fabricate :camping_group }
-        it 'creates the camping group as reserved and redirects to index' do
+        it 'mark as paid and redirects to the camping group list' do
           patch :pay_it, params: { id: camping_group }
           expect(response).to redirect_to camping_groups_path
           expect(flash[:notice]).to eq I18n.t('camping_groups.pay_it.success.message')
@@ -111,6 +116,22 @@ RSpec.describe CampingGroupsController, type: :controller do
 
       context 'with an invalid ID' do
         before { patch :pay_it, params: { id: 'foo' } }
+        it { expect(response).to be_not_found }
+      end
+    end
+    describe 'PATCH #mark_exit' do
+      context 'with valid parameters' do
+        let!(:camping_group) { Fabricate :camping_group }
+        it 'creates the camping group as reserved and redirects to index' do
+          patch :mark_exit, params: { id: camping_group }
+          expect(response).to redirect_to camping_groups_path
+          expect(flash[:notice]).to eq I18n.t('camping_groups.mark_exit.success.message')
+          expect(CampingGroup.last).to be_left
+        end
+      end
+
+      context 'with an invalid ID' do
+        before { patch :mark_exit, params: { id: 'foo' } }
         it { expect(response).to be_not_found }
       end
     end

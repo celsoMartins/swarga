@@ -30,12 +30,17 @@ en:
       vehicle_count:
         title: "Qty vehicles"
       reserved:
-        title: "Reserved Groups"
+        title: "Reserved Groups (%{value})"
       paid:
-        title: "Paid Groups"
+        title: "Paid Groups (%{value})"
       empty_message: "No camping groups on this type."
       leaving_today:
-        title: "Leaving today"
+        title: "Leaving today (%{value})"
+      left:
+        title:
+          one: "No finished groups"
+          one: "1 finished group"
+          other: "%{count} finished groups"
     new:
       title: "New camping group"
       main_form:
@@ -49,6 +54,9 @@ en:
     pay_it:
       success:
         message: "Group paid."
+    mark_exit:
+      success:
+        message: "Exit confirmed."
   vehicles:
     index:
       title: "Vehicles"
