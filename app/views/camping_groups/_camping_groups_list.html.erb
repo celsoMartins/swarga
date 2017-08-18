@@ -30,6 +30,11 @@
                           <i class="fa fa-credit-card fa-2x"></i>
                       <% end %>
                   <% end %>
+                  <% unless camping_group.left? %>
+                      <%= link_to mark_exit_camping_group_path(camping_group), method: :patch do %>
+                          <i class="fa fa-power-off fa-2x"></i>
+                      <% end %>
+                  <% end %>
                 </td>
               </tr>
           <% end %>

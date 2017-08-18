@@ -5,6 +5,7 @@ class CampingGroupsController < AuthenticatedController
     @last_day_camping_groups = CampingGroup.where('end_date <= current_date AND status <> ?', CampingGroup.statuses[:left]).order(:end_date)
     @reserved_camping_groups = CampingGroup.reserved.order(:end_date)
     @paid_camping_groups = CampingGroup.paid.order(:end_date)
+    @left_camping_groups = CampingGroup.left.order(end_date: :desc)
   end
 
   def new
@@ -25,6 +26,12 @@ class CampingGroupsController < AuthenticatedController
     @camping_group = CampingGroup.find(params[:id])
     @camping_group.paid!
     redirect_to camping_groups_path, notice: t('camping_groups.pay_it.success.message')
+  end
+
+  def mark_exit
+    @camping_group = CampingGroup.find(params[:id])
+    @camping_group.left!
+    redirect_to camping_groups_path, notice: t('camping_groups.mark_exit.success.message')
   end
 
   private

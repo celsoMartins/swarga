@@ -27,12 +27,17 @@ pt-BR:
       vehicle_count:
         title: "Qtd de veículos"
       reserved:
-        title: "Grupos reservados"
+        title: "Grupos reservados (%{value})"
       paid:
-        title: "Grupos pagos"
+        title: "Grupos pagos (%{value})"
       empty_message: "Não há grupos de camping deste tipo cadastrados."
       leaving_today:
-        title: "Saindo hoje"
+        title: "Saindo hoje (%{value})"
+      left:
+        title:
+          zero: "Nenhum grupo encerrado"
+          one: "1 grupo encerrado"
+          other: "%{count} grupos encerrados"
     new:
       title: "Novo Grupo de Camping"
       main_form:
@@ -46,6 +51,9 @@ pt-BR:
     pay_it:
       success:
         message: "Grupo marcado como PAGO."
+    mark_exit:
+      success:
+        message: "Saída de grupo de camping confirmada."
   vehicles:
     index:
       title: "Veículos"

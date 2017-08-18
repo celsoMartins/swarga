@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 swarga-form">
       <h1><%= t('camping_groups.index.title') %></h1>
-      <div class="col-xs-12 header-link"><%= link_to 'Grupos encerrados', '#' %></div>
+      <div class="col-xs-12 header-link"><%= link_to t('camping_groups.index.left.title', count: @left_camping_groups.size), '#' %></div>
     </div>
     <div class="col-xs-10 col-xs-offset-1">
       <%= link_to t('camping_groups.new.title'), new_camping_group_path, class: 'btn btn-sm btn-primary' %>
     </div>
   </div>
 
-  <%= render 'camping_groups_list', camping_groups: @last_day_camping_groups, list_title: t('camping_groups.index.leaving_today.title') %>
-  <%= render 'camping_groups_list', camping_groups: @reserved_camping_groups, list_title: t('camping_groups.index.reserved.title') %>
-  <%= render 'camping_groups_list', camping_groups: @paid_camping_groups, list_title: t('camping_groups.index.paid.title') %>
+  <%= render 'camping_groups_list', camping_groups: @last_day_camping_groups, list_title: t('camping_groups.index.leaving_today.title', value: @last_day_camping_groups.size) %>
+  <%= render 'camping_groups_list', camping_groups: @reserved_camping_groups, list_title: t('camping_groups.index.reserved.title', value: @reserved_camping_groups.size) %>
+  <%= render 'camping_groups_list', camping_groups: @paid_camping_groups, list_title: t('camping_groups.index.paid.title', value: @paid_camping_groups.size) %>
 </div>

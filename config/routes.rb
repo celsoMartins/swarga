@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'devise_custom/registrations' }
 
   resources :camping_groups, except: %i[edit update] do
-    patch :pay_it, on: :member
+    member do
+      patch :pay_it
+      patch :mark_exit
+    end
 
     resources :vehicles, only: %i[index new create]
   end
