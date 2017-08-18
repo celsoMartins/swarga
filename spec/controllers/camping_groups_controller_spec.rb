@@ -39,6 +39,7 @@ RSpec.describe CampingGroupsController, type: :controller do
         it 'assigns the instance variable and renders template' do
           get :index
           expect(response).to render_template :index
+          expect(assigns[:last_day_camping_groups]).to eq [second_camping_group]
           expect(assigns[:reserved_camping_groups]).to eq [third_camping_group]
           expect(assigns[:paid_camping_groups]).to eq [second_camping_group, first_camping_group]
         end

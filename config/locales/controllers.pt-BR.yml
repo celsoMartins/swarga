@@ -31,6 +31,8 @@ pt-BR:
       paid:
         title: "Grupos pagos"
       empty_message: "Não há grupos de camping deste tipo cadastrados."
+      leaving_today:
+        title: "Saindo hoje"
     new:
       title: "Novo Grupo de Camping"
       main_form:

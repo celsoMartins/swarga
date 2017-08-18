@@ -2,6 +2,7 @@
 
 class CampingGroupsController < AuthenticatedController
   def index
+    @last_day_camping_groups = CampingGroup.where('end_date <= current_date AND status <> ?', CampingGroup.statuses[:left]).order(:end_date)
     @reserved_camping_groups = CampingGroup.reserved.order(:end_date)
     @paid_camping_groups = CampingGroup.paid.order(:end_date)
   end
