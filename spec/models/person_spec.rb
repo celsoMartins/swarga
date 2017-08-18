@@ -6,7 +6,6 @@ RSpec.describe Person, type: :model do
   end
 
   context 'validations' do
-    it { is_expected.to validate_presence_of :camping_group }
     it { is_expected.to validate_presence_of :first_name }
     it { is_expected.to validate_presence_of :last_name }
   end

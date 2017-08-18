@@ -28,3 +28,11 @@ pt-BR:
         title: "Qtd pessoas"
       vehicle_count:
         title: "Qtd de veículos"
+    new:
+      title: "Novo Grupo de Camping"
+      main_form:
+        title: "Formulário principal"
+      responsible:
+        title: "Responsável"
+      vehicle:
+        title: "Veículo"

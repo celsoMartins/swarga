@@ -63,6 +63,12 @@ pt-BR:
       camping_group:
         one: Grupo de camping
         other: Grupos de camping
+      person:
+        one: Pessoa
+        other: Pessoas
+      vehicle:
+        one: Veículo
+        other: Veículos
     attributes:
       user:
         first_name: Nome
@@ -77,3 +83,15 @@ pt-BR:
         price_total: Preço total
         start_date: Data de entrada
         end_date: Data de saída
+      person:
+        first_name: Nome
+        last_name: Sobrenome
+        phone: Telefone
+      vehicle:
+        license_plate: Placa
+        vehicle_type: Tipo do veículo
+        enums:
+          vehicle_types:
+            car: Carro
+            moto: Moto
+            motor_home: Motor Home

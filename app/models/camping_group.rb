@@ -16,10 +16,13 @@
 #
 
 class CampingGroup < ApplicationRecord
-  has_many :people
-  has_many :vehicles
-
-  validates :start_date, :end_date, presence: true
-
   enum status: { reserved: 0, paid: 1, left: 2 }
+
+  has_many :people
+  accepts_nested_attributes_for :people, reject_if: :all_blank, allow_destroy: true
+
+  has_many :vehicles
+  accepts_nested_attributes_for :vehicles, reject_if: :all_blank, allow_destroy: true
+
+  validates :tent_number, :start_date, :end_date, presence: true
 end

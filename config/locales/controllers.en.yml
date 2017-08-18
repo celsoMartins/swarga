@@ -29,3 +29,11 @@ en:
         title: "Qty people"
       vehicle_count:
         title: "Qty vehicles"
+    new:
+      title: "New camping group"
+      main_form:
+        title: "Main form"
+      responsible:
+        title: "Responsible"
+      vehicle:
+        title: "Vehicle"

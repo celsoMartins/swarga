@@ -1,12 +1,17 @@
 <div class="container">
   <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 swarga-form">
+      <h1>
+        <%= t('camping_groups.index.title') %>
+      </h1>
+    </div>
     <div class="col-xs-10 col-xs-offset-1">
-      <h1><%= t('camping_groups.index.title') %></h1>
+      <%= link_to t('camping_groups.new.title'), new_camping_group_path, class: 'btn btn-sm btn-primary' %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-10 col-xs-offset-1 swarga-form">
       <h2><%= t('camping_groups.index.active.title') %></h2>
       <table class="table">
         <th><%= CampingGroup.human_attribute_name(:tent_number) %></th>
@@ -17,7 +22,7 @@
         <th><%= CampingGroup.human_attribute_name(:start_date) %></th>
         <th><%= CampingGroup.human_attribute_name(:end_date) %></th>
         <tbody>
-          <% @active_camping_groups.each do |camping_group| %>
+        <% @active_camping_groups.each do |camping_group| %>
             <tr>
               <td><%= camping_group.tent_number %></td>
               <td><%= camping_group.people.count %></td>
@@ -27,9 +32,12 @@
               <td><%= l(camping_group.start_date) %></td>
               <td><%= l(camping_group.end_date, format: :long) %></td>
             </tr>
-          <% end %>
+        <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to t('camping_groups.new.title'), new_camping_group_path, class: 'btn btn-sm btn-primary' %>
     </div>
   </div>
 </div>
