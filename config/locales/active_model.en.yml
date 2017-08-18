@@ -68,3 +68,9 @@ en:
         password: Password
         password_confirmation: Password confirmation
         remember_me: Remember me
+      vehicle:
+        enums:
+          vehicle_types:
+            car: Car
+            moto: Moto
+            motor_home: Motor Home

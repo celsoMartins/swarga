@@ -1,35 +1,49 @@
 <div class="container">
   <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 swarga-form">
+      <h1>
+        <%= t('camping_groups.index.title') %>
+      </h1>
+    </div>
     <div class="col-xs-10 col-xs-offset-1">
-      <h1><%= t('camping_groups.index.title') %></h1>
+      <%= link_to t('camping_groups.new.title'), new_camping_group_path, class: 'btn btn-sm btn-primary' %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
+    <div class="col-xs-10 col-xs-offset-1 swarga-form">
       <h2><%= t('camping_groups.index.active.title') %></h2>
       <table class="table">
-        <th><%= CampingGroup.human_attribute_name(:tent_number) %></th>
+        <th><%= CampingGroup.human_attribute_name(:tent_numbers) %></th>
         <th><%= t('camping_groups.index.people_count.title') %></th>
         <th><%= t('camping_groups.index.vehicle_count.title') %></th>
         <th><%= CampingGroup.human_attribute_name(:price_per_person) %></th>
         <th><%= CampingGroup.human_attribute_name(:price_total) %></th>
         <th><%= CampingGroup.human_attribute_name(:start_date) %></th>
         <th><%= CampingGroup.human_attribute_name(:end_date) %></th>
+        <th>#</th>
         <tbody>
-          <% @active_camping_groups.each do |camping_group| %>
-            <tr>
-              <td><%= camping_group.tent_number %></td>
-              <td><%= camping_group.people.count %></td>
-              <td><%= camping_group.vehicles.count %></td>
-              <td><%= number_to_currency camping_group.price_per_person %></td>
-              <td><%= number_to_currency camping_group.price_total %></td>
-              <td><%= l(camping_group.start_date) %></td>
-              <td><%= l(camping_group.end_date, format: :long) %></td>
-            </tr>
-          <% end %>
+        <% @active_camping_groups.each do |camping_group| %>
+                <tr>
+                  <td><%= link_to camping_group.tent_numbers.join(', '), camping_group_path(camping_group) %></td>
+                  <td><%= camping_group.people.count %></td>
+                  <td><%= camping_group.vehicles.count %></td>
+                  <td><%= number_to_currency camping_group.price_per_person %></td>
+                  <td><%= number_to_currency(camping_group.price_total || camping_group.calculated_total) %></td>
+                  <td><%= l(camping_group.start_date) %></td>
+                  <td><%= l(camping_group.end_date, format: :long) %></td>
+                  <td>
+                    <%= link_to camping_group_path(camping_group) do %>
+                        <i class="fa fa-eye fa-2x"></i>
+                    <% end %>
+                  </td>
+                </tr>
+        <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to t('camping_groups.new.title'), new_camping_group_path, class: 'btn btn-sm btn-primary' %>
     </div>
   </div>
 </div>

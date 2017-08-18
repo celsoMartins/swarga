@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 9.6.4
+-- Dumped by pg_dump version 9.6.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -52,7 +52,7 @@ CREATE TABLE ar_internal_metadata (
 
 CREATE TABLE camping_groups (
     id integer NOT NULL,
-    tent_number integer NOT NULL,
+    tent_numbers integer[] NOT NULL,
     status integer DEFAULT 0 NOT NULL,
     start_date date NOT NULL,
     end_date date NOT NULL,
@@ -315,7 +315,7 @@ ALTER TABLE ONLY people
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES
+INSERT INTO "schema_migrations" (version) VALUES
 ('20170401035341'),
 ('20170401060011'),
 ('20170401061026'),

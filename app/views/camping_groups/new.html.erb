@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 swarga-form">
+      <h1><%= t('camping_groups.new.title') %></h1>
+    </div>
+  </div>
+
+  <%= form_for @new_camping_group do |f| %>
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3 swarga-form">
+          <h2><%= t('camping_groups.new.main_form.title') %></h2>
+          <%= render 'form', f: f %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+          <%= f.submit class: 'btn btn-success' %>
+        </div>
+      </div>
+  <% end %>
+</div>

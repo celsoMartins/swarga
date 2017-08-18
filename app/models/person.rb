@@ -16,13 +16,13 @@
 #
 # Foreign Keys
 #
-#  fk_rails_e675cba1cd  (camping_group_id => camping_groups.id)
+#  fk_rails_...  (camping_group_id => camping_groups.id)
 #
 
 class Person < ApplicationRecord
-  belongs_to :camping_group
+  belongs_to :camping_group, optional: true
 
-  validates :first_name, :last_name, :camping_group, presence: true
+  validates :first_name, :last_name, presence: true
 
   def full_name
     "#{first_name} #{last_name}"

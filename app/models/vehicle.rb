@@ -13,7 +13,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_960012dc0d  (camping_group_id => camping_groups.id)
+#  fk_rails_...  (camping_group_id => camping_groups.id)
 #
 
 class Vehicle < ApplicationRecord
