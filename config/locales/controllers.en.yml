@@ -62,3 +62,8 @@ en:
       title: "Vehicles"
     new:
       title: "New Vehicle"
+  people:
+    new:
+      title: "New person"
+    index:
+      title: "People in the group"
