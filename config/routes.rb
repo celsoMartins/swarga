@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'devise_custom/registrations' }
 
-  resources :camping_groups, except: %i[edit update] do
+  resources :camping_groups do
     member do
       patch :pay_it
       patch :mark_exit

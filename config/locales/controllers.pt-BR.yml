@@ -54,6 +54,8 @@ pt-BR:
     mark_exit:
       success:
         message: "Saída de grupo de camping confirmada."
+    edit:
+      title: "Editar grupo de camping"
   vehicles:
     index:
       title: "Veículos"
