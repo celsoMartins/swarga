@@ -57,6 +57,8 @@ en:
     mark_exit:
       success:
         message: "Exit confirmed."
+    edit:
+      title: "Edit camping group"
   vehicles:
     index:
       title: "Vehicles"

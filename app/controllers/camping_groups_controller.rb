@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CampingGroupsController < AuthenticatedController
+  before_action :find_camping_group, except: %i[index new create]
+
   def index
     @last_day_camping_groups = CampingGroup.where('end_date <= current_date AND status <> ?', CampingGroup.statuses[:left]).order(:end_date)
     @reserved_camping_groups = CampingGroup.reserved.order(:end_date)
@@ -9,29 +11,33 @@ class CampingGroupsController < AuthenticatedController
   end
 
   def new
-    @new_camping_group = CampingGroup.new
+    @camping_group = CampingGroup.new
   end
 
   def create
-    @new_camping_group = CampingGroup.new(camping_group_params.merge(tent_numbers: tent_numbers))
-    return redirect_to camping_groups_path if @new_camping_group.save
+    @camping_group = CampingGroup.new(camping_group_params.merge(tent_numbers: tent_numbers))
+    return redirect_to camping_groups_path if @camping_group.save
     render :new
   end
 
-  def show
-    @camping_group = CampingGroup.find(params[:id])
-  end
-
   def pay_it
-    @camping_group = CampingGroup.find(params[:id])
     @camping_group.paid!
     redirect_to camping_groups_path, notice: t('camping_groups.pay_it.success.message')
   end
 
-  def mark_exit
+  def find_camping_group
     @camping_group = CampingGroup.find(params[:id])
+  end
+
+  def mark_exit
     @camping_group.left!
     redirect_to camping_groups_path, notice: t('camping_groups.mark_exit.success.message')
+  end
+
+  def update
+    @camping_group.update(camping_group_params.merge(tent_numbers: tent_numbers))
+    return redirect_to camping_groups_path if @camping_group.save
+    render :edit
   end
 
   private
