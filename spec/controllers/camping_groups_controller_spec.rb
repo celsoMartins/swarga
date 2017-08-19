@@ -35,9 +35,9 @@ RSpec.describe CampingGroupsController, type: :controller do
 
     describe 'GET #index' do
       context 'having camping groups' do
-        let!(:first_camping_group) { Fabricate :camping_group, status: :paid, end_date: Time.zone.tomorrow, people: [person] }
+        let!(:first_camping_group) { Fabricate :camping_group, status: :paid, end_date: 2.days.from_now, people: [person] }
         let!(:second_camping_group) { Fabricate :camping_group, status: :paid, end_date: Time.zone.today, people: [person] }
-        let!(:third_camping_group) { Fabricate :camping_group, status: :reserved, end_date: 2.days.from_now, people: [person] }
+        let!(:third_camping_group) { Fabricate :camping_group, status: :reserved, end_date: 3.days.from_now, people: [person] }
         let!(:fourth_camping_group) { Fabricate :camping_group, status: :left, people: [person] }
 
         it 'assigns the instance variable and renders template' do

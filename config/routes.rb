@@ -15,7 +15,8 @@ Rails.application.routes.draw do
       patch :mark_exit
     end
 
-    resources :vehicles, only: %i[index new create]
+    resources :vehicles, only: %i[new create]
+    resources :people, only: %i[new create]
   end
 
   root 'camping_groups#index'
