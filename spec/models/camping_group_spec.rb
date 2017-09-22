@@ -21,7 +21,7 @@ RSpec.describe CampingGroup, type: :model do
       let(:person) { Fabricate :person }
       let(:other_person) { Fabricate :person }
       let!(:camping_group) { Fabricate :camping_group, price_per_person: 50.0, people: [person, other_person], start_date: Time.zone.today, end_date: 3.days.from_now }
-      it { expect(camping_group.calculated_total).to eq 200.0 }
+      it { expect(camping_group.calculated_total).to eq 300.0 }
     end
     context 'having no people' do
       let!(:camping_group) { Fabricate :camping_group, price_per_person: 50 }
@@ -40,5 +40,10 @@ RSpec.describe CampingGroup, type: :model do
       let!(:camping_group) { Fabricate :camping_group }
       it { expect(camping_group.qty_people).to eq 0 }
     end
+  end
+
+  describe '#qty_nights' do
+    let!(:camping_group) { Fabricate :camping_group, start_date: 2.days.ago, end_date: Time.zone.today }
+    it { expect(camping_group.qty_nights).to eq 2 }
   end
 end

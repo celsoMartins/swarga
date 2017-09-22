@@ -41,6 +41,7 @@ en:
           one: "No finished groups"
           one: "1 finished group"
           other: "%{count} finished groups"
+      nights: "Nights"
     new:
       title: "New camping group"
       main_form:

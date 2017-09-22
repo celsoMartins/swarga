@@ -24,10 +24,14 @@ class CampingGroup < ApplicationRecord
   validates :tent_numbers, :start_date, :end_date, presence: true
 
   def calculated_total
-    (price_per_person * people.count) * ((end_date - start_date).to_i - 1)
+    (price_per_person * people.count) * qty_nights
   end
 
   def qty_people
     people.count
+  end
+
+  def qty_nights
+    (end_date - start_date).to_i
   end
 end
