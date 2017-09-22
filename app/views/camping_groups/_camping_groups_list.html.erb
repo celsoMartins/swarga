@@ -11,6 +11,7 @@
           <th><%= CampingGroup.human_attribute_name(:price_total) %></th>
           <th><%= CampingGroup.human_attribute_name(:start_date) %></th>
           <th><%= CampingGroup.human_attribute_name(:end_date) %></th>
+          <th><%= t('camping_groups.index.nights') %></th>
           <th>#</th>
           <tbody>
           <% camping_groups.each do |camping_group| %>
@@ -20,7 +21,7 @@
                 <td><%= number_to_currency camping_group.price_per_person %></td>
                 <td><%= number_to_currency(camping_group.price_total || camping_group.calculated_total) %></td>
                 <td><%= l(camping_group.start_date) %></td>
-                <td><%= l(camping_group.end_date, format: :long) %></td>
+                <td><%= l(camping_group.end_date) %></td>
                 <td>
                   <%= link_to edit_camping_group_path(camping_group) do %>
                       <i class="fa fa-pencil"></i>

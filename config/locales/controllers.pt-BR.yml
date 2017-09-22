@@ -38,6 +38,7 @@ pt-BR:
           zero: "Nenhum grupo encerrado"
           one: "1 grupo encerrado"
           other: "%{count} grupos encerrados"
+      nights: "Noites"
     new:
       title: "Novo Grupo de Camping"
       main_form:
