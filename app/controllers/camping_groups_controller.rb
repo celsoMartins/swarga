@@ -5,8 +5,8 @@ class CampingGroupsController < AuthenticatedController
 
   def index
     @last_day_camping_groups = CampingGroup.leaving
-    @reserved_camping_groups = CampingGroup.reserved.order(:end_date)
-    @paid_camping_groups = CampingGroup.paid.order(:end_date)
+    @reserved_camping_groups = CampingGroup.reserved.order(:end_date) - @last_day_camping_groups
+    @paid_camping_groups = CampingGroup.paid.order(:end_date) - @last_day_camping_groups
     @left_camping_groups = CampingGroup.left.order(end_date: :desc)
   end
 

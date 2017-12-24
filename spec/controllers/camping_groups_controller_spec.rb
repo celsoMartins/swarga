@@ -69,7 +69,7 @@ RSpec.describe CampingGroupsController, type: :controller do
           expect(assigns[:left_camping_groups]).to eq [fourth_camping_group]
           expect(assigns[:last_day_camping_groups]).to eq [second_camping_group]
           expect(assigns[:reserved_camping_groups]).to eq [third_camping_group]
-          expect(assigns[:paid_camping_groups]).to eq [second_camping_group, first_camping_group]
+          expect(assigns[:paid_camping_groups]).to eq [first_camping_group]
         end
       end
       context 'having no camping groups' do
