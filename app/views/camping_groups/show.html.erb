@@ -13,12 +13,18 @@
         <th><%= Person.human_attribute_name(:full_name) %></th>
         <th><%= Person.human_attribute_name(:document_number) %></th>
         <th><%= Person.human_attribute_name(:phone) %></th>
+        <th>#</th>
         <tbody>
         <% @camping_group.people.each do |person| %>
           <tr>
             <td><%= person.full_name %></td>
             <td><%= person.document_number %></td>
             <td><%= person.phone %></td>
+            <td>
+              <%= link_to edit_camping_group_person_path(@camping_group, person) do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
         </tbody>
