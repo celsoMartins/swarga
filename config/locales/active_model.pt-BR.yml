@@ -84,8 +84,7 @@ pt-BR:
         start_date: Data de entrada
         end_date: Data de saída
       person:
-        first_name: Nome
-        last_name: Sobrenome
+        full_name: Nome
         phone: Telefone
         document_number: Número do Documento
       vehicle:

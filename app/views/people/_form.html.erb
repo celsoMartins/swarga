@@ -3,18 +3,10 @@
 
     <%= form_for @new_person, url: camping_group_people_path(@camping_group) do |f| %>
         <div class="row">
-          <div class='col-xs-12 form-group <%= 'has-error' if @new_person.errors['first_name'].present? %>'>
-            <%= f.label :first_name, class: 'control-label' %>
-            <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
-            <span class="help-block"><%= @new_person.errors['first_name'].join(', ') %></span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class='col-xs-12 form-group <%= 'has-error' if @new_person.errors['last_name'].present? %>'>
-            <%= f.label :last_name, class: 'control-label' %>
-            <%= f.text_field :last_name, class: 'form-control' %>
-            <span class="help-block"><%= @new_person.errors['last_name'].join(', ') %></span>
+          <div class='col-xs-12 form-group <%= 'has-error' if @new_person.errors['full_name'].present? %>'>
+            <%= f.label :full_name, class: 'control-label' %>
+            <%= f.text_field :full_name, autofocus: true, class: 'form-control' %>
+            <span class="help-block"><%= @new_person.errors['full_name'].join(', ') %></span>
           </div>
         </div>
 

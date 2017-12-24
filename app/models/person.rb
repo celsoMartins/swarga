@@ -1,18 +1,18 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: people
 #
 #  id               :integer          not null, primary key
 #  camping_group_id :integer          not null
-#  first_name       :string           not null
-#  last_name        :string           not null
 #  document         :string
 #  phone            :string
 #  price_policy     :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  document_number  :string
+#  full_name        :string           not null
 #
 # Foreign Keys
 #
@@ -22,9 +22,5 @@
 class Person < ApplicationRecord
   belongs_to :camping_group, optional: true
 
-  validates :first_name, :last_name, presence: true
-
-  def full_name
-    "#{first_name} #{last_name}"
-  end
+  validates :full_name, presence: true
 end

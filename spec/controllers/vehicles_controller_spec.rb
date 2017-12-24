@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: vehicles
@@ -14,7 +15,6 @@
 #
 #  fk_rails_...  (camping_group_id => camping_groups.id)
 #
-
 
 RSpec.describe VehiclesController, type: :controller do
   context 'unauthenticated' do

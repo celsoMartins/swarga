@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: camping_groups
@@ -13,7 +14,6 @@
 #  tent_numbers     :integer          not null, is an Array
 #  updated_at       :datetime         not null
 #
-
 
 RSpec.describe CampingGroupsController, type: :controller do
   context 'unauthenticated' do
