@@ -18,6 +18,31 @@ RSpec.describe CampingGroup, type: :model do
     it { is_expected.to define_enum_for(:status).with(reserved: 0, paid: 1, left: 2) }
   end
 
+  context 'scopes' do
+    describe '.leaving' do
+      let!(:leaving) { Fabricate :camping_group, start_date: 1.day.ago, end_date: Time.zone.today }
+      let!(:other_leaving) { Fabricate :camping_group, start_date: 3.days.ago, end_date: Time.zone.today }
+      let!(:past) { Fabricate :camping_group, start_date: 2.days.ago, end_date: 1.day.ago }
+      let!(:future) { Fabricate :camping_group, end_date: 1.day.from_now }
+      it { expect(CampingGroup.leaving).to eq [past, other_leaving, leaving] }
+    end
+  end
+
+  describe '#unpaid_leaving?' do
+    context 'when it is unpaid and they are leaving today' do
+      let!(:unpaid_leaving) { Fabricate :camping_group, status: :reserved, end_date: Time.zone.today }
+      it { expect(unpaid_leaving.unpaid_leaving?).to be true }
+    end
+    context 'when it is just unpaid and they are not leaving' do
+      let!(:unpaid) { Fabricate :camping_group, status: :reserved, end_date: 1.day.from_now }
+      it { expect(unpaid.unpaid_leaving?).to be false }
+    end
+    context 'when it is paid and they are not leaving' do
+      let!(:paid) { Fabricate :camping_group, status: :paid, end_date: 1.day.from_now }
+      it { expect(paid.unpaid_leaving?).to be false }
+    end
+  end
+
   describe '#calculated_total' do
     context 'having people' do
       let(:person) { Fabricate :person }

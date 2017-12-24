@@ -4,7 +4,7 @@ class CampingGroupsController < AuthenticatedController
   before_action :find_camping_group, except: %i[index new create]
 
   def index
-    @last_day_camping_groups = CampingGroup.where('end_date <= current_date AND status <> ?', CampingGroup.statuses[:left]).order(:end_date)
+    @last_day_camping_groups = CampingGroup.leaving
     @reserved_camping_groups = CampingGroup.reserved.order(:end_date)
     @paid_camping_groups = CampingGroup.paid.order(:end_date)
     @left_camping_groups = CampingGroup.left.order(end_date: :desc)
