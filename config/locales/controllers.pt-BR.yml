@@ -22,8 +22,7 @@ pt-BR:
   camping_groups:
     index:
       title: "Listagem de grupos de camping"
-      people_count:
-        title: "Qtd pessoas"
+      people: "Pessoas"
       vehicle_count:
         title: "Qtd de veículos"
       reserved:
