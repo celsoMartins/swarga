@@ -54,6 +54,10 @@ RSpec.describe CampingGroup, type: :model do
       let!(:camping_group) { Fabricate :camping_group, price_per_person: 50 }
       it { expect(camping_group.calculated_total).to eq 0 }
     end
+    context 'having price_total' do
+      let!(:camping_group) { Fabricate :camping_group, price_per_person: nil, price_total: 200 }
+      it { expect(camping_group.calculated_total).to eq 200 }
+    end
   end
 
   describe '#qty_people' do

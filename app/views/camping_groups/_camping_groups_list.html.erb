@@ -19,7 +19,7 @@
                 <td><%= link_to camping_group.tent_numbers.join(', '), camping_group_path(camping_group) %></td>
                 <td><%= camping_group.people.count %></td>
                 <td><%= number_to_currency camping_group.price_per_person %></td>
-                <td><%= number_to_currency(camping_group.price_total || camping_group.calculated_total) %></td>
+                <td><%= number_to_currency(camping_group.calculated_total) %></td>
                 <td><%= l(camping_group.start_date) %></td>
                 <td><%= l(camping_group.end_date) %></td>
                 <td><%= camping_group.qty_nights %></td>
@@ -44,6 +44,9 @@
               </tr>
           <% end %>
           </tbody>
+          <tfoot>
+            <%= "Valor total: #{number_to_currency(camping_groups.sum(&:calculated_total))}" %>
+          </tfoot>
         </table>
     <% end %>
   </div>
