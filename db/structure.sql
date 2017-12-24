@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.4
--- Dumped by pg_dump version 9.6.4
+-- Dumped from database version 10.1
+-- Dumped by pg_dump version 10.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -68,6 +68,7 @@ CREATE TABLE camping_groups (
 --
 
 CREATE SEQUENCE camping_groups_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -104,6 +105,7 @@ CREATE TABLE people (
 --
 
 CREATE SEQUENCE people_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -156,6 +158,7 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -189,6 +192,7 @@ CREATE TABLE vehicles (
 --
 
 CREATE SEQUENCE vehicles_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
