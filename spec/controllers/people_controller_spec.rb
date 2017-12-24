@@ -1,23 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: people
-#
-#  camping_group_id :integer          not null
-#  created_at       :datetime         not null
-#  document         :string
-#  first_name       :string           not null
-#  id               :integer          not null, primary key
-#  last_name        :string           not null
-#  phone            :string
-#  price_policy     :integer
-#  updated_at       :datetime         not null
-#
-# Foreign Keys
-#
-#  fk_rails_...  (camping_group_id => camping_groups.id)
-#
-
 
 RSpec.describe PeopleController, type: :controller do
   context 'unauthenticated' do
@@ -55,12 +36,13 @@ RSpec.describe PeopleController, type: :controller do
     describe 'POST #create' do
       context 'with valid parameters' do
         it 'creates the camping group as reserved and redirects to index' do
-          post :create, params: { camping_group_id: camping_group, person: { first_name: 'foo', last_name: 'bar', phone: '444' } }
+          post :create, params: { camping_group_id: camping_group, person: { first_name: 'foo', last_name: 'bar', document_number: '3423', phone: '444' } }
           expect(response).to redirect_to camping_group_path(camping_group)
           created_person = Person.last
           expect(created_person.camping_group).to eq camping_group
           expect(created_person.first_name).to eq 'foo'
           expect(created_person.last_name).to eq 'bar'
+          expect(created_person.document_number).to eq '3423'
           expect(created_person.phone).to eq '444'
         end
       end

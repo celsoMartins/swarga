@@ -1,19 +1,4 @@
 # frozen_string_literal: true
-# == Schema Information
-#
-# Table name: camping_groups
-#
-#  created_at       :datetime         not null
-#  end_date         :date             not null
-#  id               :integer          not null, primary key
-#  price_per_person :decimal(, )
-#  price_total      :decimal(, )
-#  start_date       :date             not null
-#  status           :integer          default("reserved"), not null
-#  tent_numbers     :integer          not null, is an Array
-#  updated_at       :datetime         not null
-#
-
 
 class CampingGroupsController < AuthenticatedController
   before_action :find_camping_group, except: %i[index new create]

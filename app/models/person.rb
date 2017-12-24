@@ -1,18 +1,18 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: people
 #
-#  camping_group_id :integer          not null
-#  created_at       :datetime         not null
-#  document         :string
-#  first_name       :string           not null
 #  id               :integer          not null, primary key
+#  camping_group_id :integer          not null
+#  first_name       :string           not null
 #  last_name        :string           not null
+#  document         :string
 #  phone            :string
 #  price_policy     :integer
+#  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  document_number  :string
 #
 # Foreign Keys
 #

@@ -68,7 +68,6 @@ CREATE TABLE camping_groups (
 --
 
 CREATE SEQUENCE camping_groups_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -96,7 +95,8 @@ CREATE TABLE people (
     phone character varying,
     price_policy integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    document_number character varying
 );
 
 
@@ -105,7 +105,6 @@ CREATE TABLE people (
 --
 
 CREATE SEQUENCE people_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -158,7 +157,6 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -192,7 +190,6 @@ CREATE TABLE vehicles (
 --
 
 CREATE SEQUENCE vehicles_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -323,6 +320,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170401035341'),
 ('20170401060011'),
 ('20170401061026'),
-('20170401061313');
+('20170401061313'),
+('20171224122232');
 
 

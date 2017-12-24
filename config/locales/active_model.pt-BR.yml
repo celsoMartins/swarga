@@ -87,6 +87,7 @@ pt-BR:
         first_name: Nome
         last_name: Sobrenome
         phone: Telefone
+        document_number: Número do Documento
       vehicle:
         license_plate: Placa
         vehicle_type: Tipo do veículo
