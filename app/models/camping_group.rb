@@ -21,7 +21,13 @@ class CampingGroup < ApplicationRecord
   has_many :people, dependent: :restrict_with_exception
   has_many :vehicles, dependent: :restrict_with_exception
 
+  scope :leaving, -> { where('end_date <= current_date AND status <> ?', CampingGroup.statuses[:left]).order(:end_date, :start_date) }
+
   validates :tent_numbers, :start_date, :end_date, presence: true
+
+  def unpaid_leaving?
+    reserved? && end_date <= Time.zone.today
+  end
 
   def calculated_total
     (price_per_person * people.count) * qty_nights

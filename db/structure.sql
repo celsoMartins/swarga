@@ -90,13 +90,13 @@ ALTER SEQUENCE camping_groups_id_seq OWNED BY camping_groups.id;
 CREATE TABLE people (
     id integer NOT NULL,
     camping_group_id integer NOT NULL,
-    first_name character varying NOT NULL,
-    last_name character varying NOT NULL,
     document character varying,
     phone character varying,
     price_policy integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    document_number character varying,
+    full_name character varying NOT NULL
 );
 
 
@@ -323,6 +323,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170401035341'),
 ('20170401060011'),
 ('20170401061026'),
-('20170401061313');
+('20170401061313'),
+('20171224122232'),
+('20171224125815');
 
 

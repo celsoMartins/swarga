@@ -67,3 +67,7 @@ pt-BR:
       title: "Nova pessoa no grupo"
     index:
       title: "Pessoas no grupo"
+    edit:
+      title: "Editar Pessoa"
+    update:
+      success: "Atualizado com sucesso"

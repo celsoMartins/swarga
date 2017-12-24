@@ -8,6 +8,36 @@
 
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2 swarga-form">
+      <h2><%= t('people.index.title') %></h2>
+      <table class="table">
+        <th><%= Person.human_attribute_name(:full_name) %></th>
+        <th><%= Person.human_attribute_name(:document_number) %></th>
+        <th><%= Person.human_attribute_name(:phone) %></th>
+        <th>#</th>
+        <tbody>
+        <% @camping_group.people.each do |person| %>
+          <tr>
+            <td><%= person.full_name %></td>
+            <td><%= person.document_number %></td>
+            <td><%= person.phone %></td>
+            <td>
+              <%= link_to edit_camping_group_person_path(@camping_group, person) do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
+              <%= link_to camping_group_person_path(@camping_group, person), method: :delete do %>
+                <i class="fa fa-remove"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= link_to t('people.new.title'), new_camping_group_person_path(@camping_group), class: 'btn btn-sm btn-primary' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 swarga-form">
       <h2><%= t('vehicles.index.title') %></h2>
       <table class="table">
         <th><%= Vehicle.human_attribute_name(:license_plate) %></th>
@@ -22,27 +52,6 @@
         </tbody>
       </table>
       <%= link_to t('vehicles.new.title'), new_camping_group_vehicle_path(@camping_group), class: 'btn btn-sm btn-primary' %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
-      <h2><%= t('people.index.title') %></h2>
-      <table class="table">
-        <th><%= Person.human_attribute_name(:first_name) %></th>
-        <th><%= Person.human_attribute_name(:last_name) %></th>
-        <th><%= Person.human_attribute_name(:phone) %></th>
-        <tbody>
-        <% @camping_group.people.each do |person| %>
-            <tr>
-              <td><%= person.first_name %></td>
-              <td><%= person.last_name %></td>
-              <td><%= person.phone %></td>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-      <%= link_to t('people.new.title'), new_camping_group_person_path(@camping_group), class: 'btn btn-sm btn-primary' %>
     </div>
   </div>
 </div>

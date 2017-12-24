@@ -70,3 +70,7 @@ en:
       title: "New person"
     index:
       title: "People in the group"
+    edit:
+      title: "Edit person"
+    update:
+      success: "The person was updated."
