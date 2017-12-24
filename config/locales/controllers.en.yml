@@ -25,8 +25,7 @@ en:
       title: "Camping groups list"
       active:
         title: "Active groups"
-      people_count:
-        title: "Qty people"
+      people: "People"
       vehicle_count:
         title: "Qty vehicles"
       reserved:
