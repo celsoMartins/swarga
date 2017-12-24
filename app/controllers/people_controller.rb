@@ -2,7 +2,7 @@
 
 class PeopleController < AuthenticatedController
   before_action :find_camping_group
-  before_action :find_person, only: %i[edit update]
+  before_action :find_person, only: %i[edit update destroy]
 
   def new
     @person = Person.new(camping_group: @camping_group)
@@ -22,6 +22,11 @@ class PeopleController < AuthenticatedController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @person.delete
+    redirect_to camping_group_path(@camping_group, notice: t('people.update.success'))
   end
 
   private

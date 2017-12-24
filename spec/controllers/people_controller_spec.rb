@@ -18,6 +18,10 @@ RSpec.describe PeopleController, type: :controller do
       before { put :update, params: { camping_group_id: 'foo', id: 'bar' } }
       it { expect(response).to redirect_to new_user_session_path }
     end
+    describe 'DELETE #destroy' do
+      before { delete :destroy, params: { camping_group_id: 'foo', id: 'bar' } }
+      it { expect(response).to redirect_to new_user_session_path }
+    end
   end
 
   context 'authenticated' do
@@ -75,7 +79,6 @@ RSpec.describe PeopleController, type: :controller do
           it 'finds the person and renders the template' do
             get :edit, params: { camping_group_id: camping_group, id: person }
             expect(assigns(:person)).to eq person
-            expect(assigns(:person).camping_group).to eq camping_group
             expect(response).to render_template :edit
           end
         end
@@ -122,6 +125,26 @@ RSpec.describe PeopleController, type: :controller do
           before { put :update, params: { camping_group_id: 'foo', id: person } }
           it { expect(response).to be_not_found }
         end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      let(:person) { Fabricate :person, camping_group: camping_group }
+      context 'with a valid camping group' do
+        context 'and a valid person' do
+          it 'finds the person and renders the template' do
+            delete :destroy, params: { camping_group_id: camping_group, id: person }
+            expect(Person.last).to be_nil
+          end
+        end
+        context 'and an invalid person' do
+          before { delete :destroy, params: { id: 'foo', camping_group_id: camping_group } }
+          it { expect(response).to be_not_found }
+        end
+      end
+      context 'with an invalid camping group' do
+        before { delete :destroy, params: { id: person, camping_group_id: 'foo' } }
+        it { expect(response).to be_not_found }
       end
     end
   end

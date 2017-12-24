@@ -24,6 +24,9 @@
               <%= link_to edit_camping_group_person_path(@camping_group, person) do %>
                 <i class="fa fa-pencil"></i>
               <% end %>
+              <%= link_to camping_group_person_path(@camping_group, person), method: :delete do %>
+                <i class="fa fa-remove"></i>
+              <% end %>
             </td>
           </tr>
         <% end %>

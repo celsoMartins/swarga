@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
 
     resources :vehicles, only: %i[new create]
-    resources :people, only: %i[new create edit update]
+    resources :people
   end
 
   root 'camping_groups#index'
