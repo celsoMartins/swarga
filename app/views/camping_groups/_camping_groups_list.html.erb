@@ -6,10 +6,9 @@
     <% else %>
         <table class="table">
           <th><%= CampingGroup.human_attribute_name(:tent_numbers) %></th>
+          <th><%= CampingGroup.human_attribute_name(:status) %></th>
           <th><%= t('camping_groups.index.people_count.title') %></th>
-          <th><%= CampingGroup.human_attribute_name(:price_per_person) %></th>
           <th><%= CampingGroup.human_attribute_name(:price_total) %></th>
-          <th><%= CampingGroup.human_attribute_name(:start_date) %></th>
           <th><%= CampingGroup.human_attribute_name(:end_date) %></th>
           <th><%= t('camping_groups.index.nights') %></th>
           <th>#</th>
@@ -17,10 +16,10 @@
           <% camping_groups.each do |camping_group| %>
               <tr class='<%= 'not-paid-leaving' if camping_group.unpaid_leaving? %>'>
                 <td><%= link_to camping_group.tent_numbers.join(', '), camping_group_path(camping_group) %></td>
-                <td><%= camping_group.people.count %></td>
-                <td><%= number_to_currency camping_group.price_per_person %></td>
+
+                <td><%= t("activerecord.attributes.camping_group.enum.status.#{camping_group.status}") %></td>
+                <td><%= camping_group.people.pluck(:full_name).join(', ') %></td>
                 <td><%= number_to_currency(camping_group.calculated_total) %></td>
-                <td><%= l(camping_group.start_date) %></td>
                 <td><%= l(camping_group.end_date) %></td>
                 <td><%= camping_group.qty_nights %></td>
                 <td>

@@ -83,6 +83,11 @@ pt-BR:
         price_total: Preço total
         start_date: Data de entrada
         end_date: Data de saída
+        enum:
+          status:
+            reserved: Reservado
+            paid: Pago
+            left: Saiu
       person:
         full_name: Nome
         phone: Telefone

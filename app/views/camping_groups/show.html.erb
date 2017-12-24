@@ -1,8 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2 swarga-form">
-      <h1><%= t('camping_groups.show.title') %></h1>
       <span><%= link_to '< Voltar', camping_groups_path %></span>
+      <h1><%= t('camping_groups.show.title') %></h1>
+      <h4><%= "#{CampingGroup.human_attribute_name(:start_date)}: #{l(@camping_group.start_date)}"%></h4>
+      <h4><%= "#{CampingGroup.human_attribute_name(:end_date)}: #{l(@camping_group.end_date)}"%></h4>
+      <h4><%= "#{CampingGroup.human_attribute_name(:price_per_person)}: #{number_to_currency(@camping_group.price_per_person)}"%></h4>
+      <h4><%= "#{CampingGroup.human_attribute_name(:price_total)}: #{number_to_currency(@camping_group.calculated_total)}"%></h4>
     </div>
   </div>
 

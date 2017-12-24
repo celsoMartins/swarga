@@ -74,3 +74,9 @@ en:
             car: Car
             moto: Moto
             motor_home: Motor Home
+      camping_group:
+        enum:
+          status:
+            reserved: Reserved
+            paid: Paid
+            left: Left
