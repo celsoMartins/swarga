@@ -1,4 +1,20 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: vehicles
+#
+#  camping_group_id :integer          not null
+#  created_at       :datetime         not null
+#  id               :integer          not null, primary key
+#  license_plate    :string           not null
+#  updated_at       :datetime         not null
+#  vehicle_type     :integer          default("car"), not null
+#
+# Foreign Keys
+#
+#  fk_rails_...  (camping_group_id => camping_groups.id)
+#
+
 
 RSpec.describe VehiclesController, type: :controller do
   context 'unauthenticated' do
