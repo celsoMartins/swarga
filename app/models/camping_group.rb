@@ -33,7 +33,7 @@ class CampingGroup < ApplicationRecord
   end
 
   def calculated_total
-    return (price_per_person * people.count) * qty_nights if price_per_person.present?
+    return (price_per_person * people.billable.count) * qty_nights if price_per_person.present?
     price_total
   end
 

@@ -23,5 +23,7 @@
 class Person < ApplicationRecord
   belongs_to :camping_group, optional: true
 
+  scope :billable, -> { where(courtesy: false) }
+
   validates :full_name, presence: true
 end
