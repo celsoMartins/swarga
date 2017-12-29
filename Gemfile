@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.4.3'
 
-gem 'rails', '5.0.3'
+gem 'rails', '5.1.4'
 gem 'uglifier'
 gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails'
@@ -26,8 +26,8 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
-  gem 'rubocop', git: 'git@github.com:bbatsov/rubocop.git', branch: 'master'
-  gem 'simplecov', require: false
+  gem 'rubocop'
+  gem 'simplecov', '0.15.1', require: false
   gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'parser'
   gem 'brakeman'
