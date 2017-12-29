@@ -1,5 +1,6 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -88,7 +89,8 @@ CREATE TABLE people (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     document_number character varying,
-    full_name character varying NOT NULL
+    full_name character varying NOT NULL,
+    courtesy boolean DEFAULT false
 );
 
 
@@ -317,6 +319,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170401061026'),
 ('20170401061313'),
 ('20171224122232'),
-('20171224125815');
+('20171224125815'),
+('20171229205339');
 
 

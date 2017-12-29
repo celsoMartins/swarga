@@ -39,10 +39,10 @@ RSpec.describe CampingGroupsController, type: :controller do
   context 'authenticated' do
     let(:user) { Fabricate :user }
     before { sign_in user }
-    let(:first_person) { Fabricate :person, full_name: 'Xica da Silva' }
-    let(:second_person) { Fabricate :person, full_name: 'Jose Jorge' }
-    let(:third_person) { Fabricate :person, full_name: 'Marta' }
-    let(:fourth_person) { Fabricate :person, full_name: 'Joaquim' }
+    let(:first_person) { Fabricate.build :person, full_name: 'Xica da Silva' }
+    let(:second_person) { Fabricate.build :person, full_name: 'Jose Jorge' }
+    let(:third_person) { Fabricate.build :person, full_name: 'Marta' }
+    let(:fourth_person) { Fabricate.build :person, full_name: 'Joaquim' }
 
     describe 'GET #index' do
       context 'having camping groups' do

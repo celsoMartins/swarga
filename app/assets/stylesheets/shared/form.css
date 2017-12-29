@@ -25,3 +25,7 @@
     text-align: right;
     text-transform: uppercase;
 }
+
+.spaced-botton-component {
+    margin-bottom: 8px;
+}

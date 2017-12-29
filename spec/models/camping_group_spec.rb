@@ -27,6 +27,8 @@ RSpec.describe CampingGroup, type: :model do
       it { expect(CampingGroup.leaving).to eq [past, other_leaving, leaving] }
     end
 
+    pending '.reserved_active'
+    pending '.paid_active'
     pending '.for_term'
   end
 
