@@ -12,7 +12,6 @@ gem 'yui-compressor'
 gem 'devise'
 
 gem 'pg'
-gem 'pg_search'
 
 gem 'figaro'
 

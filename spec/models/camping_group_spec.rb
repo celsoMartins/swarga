@@ -26,6 +26,8 @@ RSpec.describe CampingGroup, type: :model do
       let!(:future) { Fabricate :camping_group, end_date: 1.day.from_now }
       it { expect(CampingGroup.leaving).to eq [past, other_leaving, leaving] }
     end
+
+    pending '.for_term'
   end
 
   describe '#unpaid_leaving?' do

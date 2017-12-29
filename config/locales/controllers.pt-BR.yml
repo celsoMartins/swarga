@@ -15,6 +15,7 @@ pt-BR:
     messages:
       saved: Salvo!
       save_error: Não foi possível salvar! Por favor recarregue a página e tente novamente.
+    search: "Buscar"
   header:
     logout: Sair
     sign_up: Cadastre-se
@@ -70,3 +71,6 @@ pt-BR:
       title: "Editar Pessoa"
     update:
       success: "Atualizado com sucesso"
+  edit:
+    search:
+      placeholder: "Entre com o nome da pessoa ou número da barraca para a busca"

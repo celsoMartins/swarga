@@ -21,7 +21,8 @@ class CampingGroup < ApplicationRecord
   has_many :people, dependent: :restrict_with_exception
   has_many :vehicles, dependent: :restrict_with_exception
 
-  scope :leaving, -> { where('end_date <= current_date AND status <> ?', CampingGroup.statuses[:left]).order(:end_date, :start_date) }
+  scope :leaving, -> { where('end_date <= ? AND camping_groups.status <> ?', Time.zone.today, CampingGroup.statuses[:left]).order(:end_date, :start_date) }
+  scope :for_term, ->(term) { includes(:people).where('(UPPER(full_name) LIKE :search_name) OR (:search_tent = ANY(tent_numbers))', search_name: "%#{term&.upcase}%", search_tent: term.to_i).references(:people) }
 
   validates :tent_numbers, :start_date, :end_date, presence: true
 

@@ -1,9 +1,9 @@
 GIT
   remote: git@github.com:bbatsov/rubocop.git
-  revision: a2bbab61fa117714b081ac73e21784915c474d6a
+  revision: 9f7c9cdabefdeac705f0a621c6a58e24d7757e9a
   branch: master
   specs:
-    rubocop (0.52.0)
+    rubocop (0.52.1)
       parallel (~> 1.10)
       parser (>= 2.4.0.2, < 3.0)
       powerpack (~> 0.1)
@@ -110,7 +110,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_xml (0.6.0)
-    nio4r (2.1.0)
+    nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
@@ -118,10 +118,6 @@ GEM
     parser (2.4.0.2)
       ast (~> 2.3)
     pg (0.21.0)
-    pg_search (2.1.1)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      arel (>= 6)
     powerpack (0.1.1)
     puma (3.11.0)
     rack (2.0.3)
@@ -216,7 +212,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
-    uglifier (4.0.2)
+    uglifier (4.1.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.3.0)
     warden (1.2.7)
@@ -248,7 +244,6 @@ DEPENDENCIES
   jquery-rails
   parser
   pg
-  pg_search
   puma
   rails (= 5.0.3)
   rails-controller-testing

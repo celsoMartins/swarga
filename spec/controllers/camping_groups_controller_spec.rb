@@ -1,20 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: camping_groups
-#
-#  created_at       :datetime         not null
-#  end_date         :date             not null
-#  id               :integer          not null, primary key
-#  price_per_person :decimal(, )
-#  price_total      :decimal(, )
-#  start_date       :date             not null
-#  status           :integer          default("reserved"), not null
-#  tent_numbers     :integer          not null, is an Array
-#  updated_at       :datetime         not null
-#
-
 RSpec.describe CampingGroupsController, type: :controller do
   context 'unauthenticated' do
     describe 'GET #index' do
@@ -54,22 +39,56 @@ RSpec.describe CampingGroupsController, type: :controller do
   context 'authenticated' do
     let(:user) { Fabricate :user }
     before { sign_in user }
-    let(:person) { Fabricate.build :person }
+    let(:first_person) { Fabricate :person, full_name: 'Xica da Silva' }
+    let(:second_person) { Fabricate :person, full_name: 'Jose Jorge' }
+    let(:third_person) { Fabricate :person, full_name: 'Marta' }
+    let(:fourth_person) { Fabricate :person, full_name: 'Joaquim' }
 
     describe 'GET #index' do
       context 'having camping groups' do
-        let!(:first_camping_group) { Fabricate :camping_group, status: :paid, end_date: 2.days.from_now, people: [person] }
-        let!(:second_camping_group) { Fabricate :camping_group, status: :paid, end_date: Time.zone.today, people: [person] }
-        let!(:third_camping_group) { Fabricate :camping_group, status: :reserved, end_date: 3.days.from_now, people: [person] }
-        let!(:fourth_camping_group) { Fabricate :camping_group, status: :left, people: [person] }
+        context 'and passing no search' do
+          let!(:first_camping_group) { Fabricate :camping_group, status: :paid, end_date: 2.days.from_now, people: [first_person] }
+          let!(:second_camping_group) { Fabricate :camping_group, status: :paid, end_date: Time.zone.today, people: [second_person] }
+          let!(:third_camping_group) { Fabricate :camping_group, status: :reserved, end_date: 3.days.from_now, people: [third_person] }
+          let!(:fourth_camping_group) { Fabricate :camping_group, status: :left, people: [fourth_person] }
 
-        it 'assigns the instance variable and renders template' do
-          get :index
-          expect(response).to render_template :index
-          expect(assigns[:left_camping_groups]).to eq [fourth_camping_group]
-          expect(assigns[:last_day_camping_groups]).to eq [second_camping_group]
-          expect(assigns[:reserved_camping_groups]).to eq [third_camping_group]
-          expect(assigns[:paid_camping_groups]).to eq [first_camping_group]
+          it 'assigns the instance variables and renders the template' do
+            get :index
+            expect(response).to render_template :index
+            expect(assigns[:left_camping_groups]).to eq [fourth_camping_group]
+            expect(assigns[:last_day_camping_groups]).to eq [second_camping_group]
+            expect(assigns[:reserved_camping_groups]).to eq [third_camping_group]
+            expect(assigns[:paid_camping_groups]).to eq [first_camping_group]
+          end
+        end
+
+        context 'passing search terms' do
+          let!(:first_camping_group) { Fabricate :camping_group, tent_numbers: [1000, 2003], status: :paid, end_date: 2.days.from_now, people: [first_person] }
+          let!(:second_camping_group) { Fabricate :camping_group, status: :paid, end_date: Time.zone.today, people: [second_person] }
+          it 'returns the search for the first person' do
+            get :index, params: { search_term: 'Xica' }
+            expect(response).to render_template :index
+            expect(assigns[:paid_camping_groups]).to eq [first_camping_group]
+            expect(assigns[:left_camping_groups]).to eq []
+            expect(assigns[:last_day_camping_groups]).to eq []
+            expect(assigns[:reserved_camping_groups]).to eq []
+          end
+          it 'returns the search for the second person' do
+            get :index, params: { search_term: 'Jorge' }
+            expect(response).to render_template :index
+            expect(assigns[:last_day_camping_groups]).to eq [second_camping_group]
+            expect(assigns[:paid_camping_groups]).to eq []
+            expect(assigns[:left_camping_groups]).to eq []
+            expect(assigns[:reserved_camping_groups]).to eq []
+          end
+          it 'returns the search for the tent number' do
+            get :index, params: { search_term: 2003 }
+            expect(response).to render_template :index
+            expect(assigns[:last_day_camping_groups]).to eq []
+            expect(assigns[:paid_camping_groups]).to eq [first_camping_group]
+            expect(assigns[:left_camping_groups]).to eq []
+            expect(assigns[:reserved_camping_groups]).to eq []
+          end
         end
       end
       context 'having no camping groups' do
