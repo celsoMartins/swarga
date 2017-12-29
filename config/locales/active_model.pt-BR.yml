@@ -92,6 +92,7 @@ pt-BR:
         full_name: Nome
         phone: Telefone
         document_number: Número do Documento
+        courtesy: Cortesia?
       vehicle:
         license_plate: Placa
         vehicle_type: Tipo do veículo

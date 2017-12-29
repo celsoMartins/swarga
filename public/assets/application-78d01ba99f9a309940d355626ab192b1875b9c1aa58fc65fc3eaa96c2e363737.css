@@ -1,0 +1,57 @@
+.swarga-header {
+    background-color: #f3f6fc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.help-block {
+    margin-bottom: 0;
+
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.has-error {
+    border: 2px solid lighten(#EE1C3A, 10%) !important;
+    box-shadow: none;
+}
+
+.no-data {
+    font-style: italic;
+}
+
+.header-link {
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.spaced-botton-component {
+    margin-bottom: 8px;
+}
+.header {
+  padding: 10px;
+  background-color: #8fa9df;
+}
+.not-paid-leaving {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+    background-color: lightpink;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+

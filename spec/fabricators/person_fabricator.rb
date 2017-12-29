@@ -3,4 +3,5 @@
 Fabricator(:person) do
   camping_group
   full_name { Faker::Name.name }
+  courtesy false
 end

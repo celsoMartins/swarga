@@ -21,6 +21,8 @@ class CampingGroup < ApplicationRecord
   has_many :people, dependent: :restrict_with_exception
   has_many :vehicles, dependent: :restrict_with_exception
 
+  scope :reserved_active, -> { reserved.where('end_date > ?', Time.zone.today) }
+  scope :paid_active, -> { paid.where('end_date > ?', Time.zone.today).order(:end_date) }
   scope :leaving, -> { where('end_date <= ? AND camping_groups.status <> ?', Time.zone.today, CampingGroup.statuses[:left]).order(:end_date, :start_date) }
   scope :for_term, ->(term) { includes(:people).where('(UPPER(full_name) LIKE :search_name) OR (:search_tent = ANY(tent_numbers))', search_name: "%#{term&.upcase}%", search_tent: term.to_i).references(:people) }
 
@@ -31,7 +33,7 @@ class CampingGroup < ApplicationRecord
   end
 
   def calculated_total
-    return (price_per_person * people.count) * qty_nights if price_per_person.present?
+    return (price_per_person * people.billable.count) * qty_nights if price_per_person.present?
     price_total
   end
 

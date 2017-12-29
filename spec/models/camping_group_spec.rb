@@ -27,6 +27,8 @@ RSpec.describe CampingGroup, type: :model do
       it { expect(CampingGroup.leaving).to eq [past, other_leaving, leaving] }
     end
 
+    pending '.reserved_active'
+    pending '.paid_active'
     pending '.for_term'
   end
 
@@ -49,7 +51,8 @@ RSpec.describe CampingGroup, type: :model do
     context 'having people' do
       let(:person) { Fabricate :person }
       let(:other_person) { Fabricate :person }
-      let!(:camping_group) { Fabricate :camping_group, price_per_person: 50.0, people: [person, other_person], start_date: Time.zone.today, end_date: 3.days.from_now }
+      let(:courtesy_person) { Fabricate :person, courtesy: true }
+      let!(:camping_group) { Fabricate :camping_group, price_per_person: 50.0, people: [person, other_person, courtesy_person], start_date: Time.zone.today, end_date: 3.days.from_now }
       it { expect(camping_group.calculated_total).to eq 300.0 }
     end
     context 'having no people' do

@@ -32,7 +32,7 @@ class PeopleController < AuthenticatedController
   private
 
   def person_params
-    params.require(:person).permit(:full_name, :document_number, :phone)
+    params.require(:person).permit(:full_name, :document_number, :phone, :courtesy)
   end
 
   def find_camping_group
