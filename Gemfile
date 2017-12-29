@@ -28,7 +28,7 @@ group :test, :development do
   gem 'faker'
   gem 'rubocop'
   gem 'simplecov', '0.15.1', require: false
-  gem 'codeclimate-test-reporter', '~> 1.0.0'
+  gem 'codeclimate-test-reporter'
   gem 'parser'
   gem 'brakeman'
 end
