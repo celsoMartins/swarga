@@ -27,9 +27,38 @@ RSpec.describe CampingGroup, type: :model do
       it { expect(CampingGroup.leaving).to eq [past, other_leaving, leaving] }
     end
 
-    pending '.reserved_active'
-    pending '.paid_active'
-    pending '.for_term'
+    describe '.reserved_active' do
+      let!(:reserved) { Fabricate :camping_group, status: :reserved, start_date: 1.day.ago, end_date: 2.days.from_now }
+      let!(:other_reserved) { Fabricate :camping_group, status: :reserved, start_date: 3.days.ago, end_date: 1.day.from_now }
+      let!(:reserved_past) { Fabricate :camping_group, status: :reserved, start_date: 2.days.ago, end_date: 1.day.ago }
+      let!(:reserved_now) { Fabricate :camping_group, status: :reserved, end_date: Time.zone.today }
+      it { expect(CampingGroup.reserved_active).to eq [other_reserved, reserved] }
+    end
+
+    describe '.paid_active' do
+      let!(:reserved) { Fabricate :camping_group, status: :paid, start_date: 1.day.ago, end_date: 2.days.from_now }
+      let!(:other_reserved) { Fabricate :camping_group, status: :paid, start_date: 3.days.ago, end_date: 1.day.from_now }
+      let!(:reserved_past) { Fabricate :camping_group, status: :paid, start_date: 2.days.ago, end_date: 1.day.ago }
+      let!(:reserved_now) { Fabricate :camping_group, status: :paid, end_date: Time.zone.today }
+      it { expect(CampingGroup.paid_active).to eq [other_reserved, reserved] }
+    end
+
+    describe '.for_term' do
+      context 'search by name' do
+        let(:person) { Fabricate.build :person, full_name: 'test name' }
+        let(:other_person) { Fabricate.build :person, full_name: 'other name' }
+        let!(:reserved) { Fabricate :camping_group, status: :reserved, start_date: 1.day.ago, end_date: 2.days.from_now, people: [person] }
+        let!(:paid) { Fabricate :camping_group, status: :paid, start_date: 1.day.ago, end_date: 2.days.from_now, people: [other_person] }
+        it { expect(CampingGroup.for_term('tEsT')).to eq [reserved] }
+        it { expect(CampingGroup.for_term('oTHer')).to eq [paid] }
+      end
+      context 'search by tent_number' do
+        let!(:tent_21_30) { Fabricate :camping_group, tent_numbers: [21, 30] }
+        let!(:tent_40_50) { Fabricate :camping_group, tent_numbers: [40, 50] }
+        it { expect(CampingGroup.for_term('21')).to eq [tent_21_30] }
+        it { expect(CampingGroup.for_term('50')).to eq [tent_40_50] }
+      end
+    end
   end
 
   describe '#unpaid_leaving?' do
