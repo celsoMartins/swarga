@@ -4,10 +4,11 @@ class CampingGroupsController < AuthenticatedController
   before_action :find_camping_group, except: %i[index new create]
 
   def index
-    @last_day_camping_groups = CampingGroup.leaving
-    @reserved_camping_groups = CampingGroup.reserved.order(:end_date) - @last_day_camping_groups
-    @paid_camping_groups = CampingGroup.paid.order(:end_date) - @last_day_camping_groups
+    @last_day_camping_groups = CampingGroup.leaving.for_term(search_term)
+    @reserved_camping_groups = CampingGroup.reserved.for_term(search_term) - @last_day_camping_groups
+    @paid_camping_groups = CampingGroup.paid.for_term(search_term).order(:end_date) - @last_day_camping_groups
     @left_camping_groups = CampingGroup.left.order(end_date: :desc)
+    render :index
   end
 
   def new
@@ -48,5 +49,9 @@ class CampingGroupsController < AuthenticatedController
 
   def tent_numbers
     camping_group_params[:tent_numbers].split(',')
+  end
+
+  def search_term
+    @search_term ||= params[:search_term]
   end
 end

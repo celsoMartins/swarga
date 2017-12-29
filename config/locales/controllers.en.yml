@@ -15,6 +15,7 @@ en:
     messages:
       saved: Saved!
       save_error: We couldn't save it now! Please reload and try again.
+    search: "Search"
   header:
     logout: Logout
     explore: Explore
@@ -73,3 +74,6 @@ en:
       title: "Edit person"
     update:
       success: "The person was updated."
+  edit:
+    search:
+      placeholder: "Search for person name or tent number."

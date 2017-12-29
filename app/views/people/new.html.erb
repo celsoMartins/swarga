@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+    <div class="col-xs-8 col-xs-offset-2 swarga-header">
       <h1><%= t('people.new.title') %></h1>
       <span><%= link_to '< Voltar', camping_group_path(@camping_group) %></span>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+    <div class="col-xs-8 col-xs-offset-2 swarga-header">
       <%= form_for @person, url: camping_group_people_path(@camping_group) do |f| %>
         <%= render 'form', f: f %>
       <% end %>

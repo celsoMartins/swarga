@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+    <div class="col-xs-8 col-xs-offset-2 swarga-header">
       <span><%= link_to '< Voltar', camping_groups_path %></span>
       <h1><%= t('camping_groups.show.title') %></h1>
       <h4><%= "#{CampingGroup.human_attribute_name(:start_date)}: #{l(@camping_group.start_date)}"%></h4>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+    <div class="col-xs-8 col-xs-offset-2 swarga-header">
       <h2><%= t('people.index.title') %></h2>
       <table class="table">
         <th><%= Person.human_attribute_name(:full_name) %></th>
@@ -41,7 +41,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+    <div class="col-xs-8 col-xs-offset-2 swarga-header">
       <h2><%= t('vehicles.index.title') %></h2>
       <table class="table">
         <th><%= Vehicle.human_attribute_name(:license_plate) %></th>

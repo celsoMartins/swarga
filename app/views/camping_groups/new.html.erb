@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-form">
+    <div class="col-xs-8 col-xs-offset-2 swarga-header">
       <h1><%= t('camping_groups.new.title') %></h1>
     </div>
   </div>
 
   <%= form_for @camping_group do |f| %>
       <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 swarga-form">
+        <div class="col-xs-8 col-xs-offset-2 swarga-header">
           <h2><%= t('camping_groups.new.main_form.title') %></h2>
           <%= render 'form', f: f %>
         </div>
