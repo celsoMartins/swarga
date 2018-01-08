@@ -2,11 +2,12 @@ version: 2
 jobs:
   build:
     working_directory: ~/swarga
-    environment:
-      CC_TEST_REPORTER_ID: 8ba7be48e9cdca646e8f031c2264d2c403d532e1020ae463bad4e68c81e67b23
+
     docker:
       - image: circleci/ruby:2.4.3-node
         environment:
+          CC_TEST_REPORTER_ID: 8ba7be48e9cdca646e8f031c2264d2c403d532e1020ae463bad4e68c81e67b23
+          TEST_REPORT_PATH: "test/reports"
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
@@ -17,20 +18,17 @@ jobs:
     steps:
       - checkout
 
-      # Restore bundle cache
       - restore_cache:
           keys:
             - swarga-{{ checksum "Gemfile.lock" }}
             - swarga-
 
-      # Bundle install dependencies
       - run:
           name: Install dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+          command: |
+            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 
-      - run: sudo apt install postgresql-client
-
-      # Store bundle cache
       - save_cache:
           key: swarga-{{ checksum "Gemfile.lock" }}
           paths:
@@ -39,12 +37,37 @@ jobs:
       - run:
           name: Database Setup
           command: |
+            sudo apt install postgresql-client
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
       - run:
+          name:  Download cc-test-reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
+      - persist_to_workspace:
+          root: tmp
+          paths:
+            - cc-test-reporter
+
+      - run:
           name: RSpec
-          command: bundle exec rake spec
+          command: |
+            bundle exec rake spec
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o tmp/codeclimate.backend.json coverage/backend/.resultset.json
+      - persist_to_workspace:
+          root: tmp
+          paths:
+            - codeclimate.backend.json
+
+      - attach_workspace:
+          at: ~/repo/tmp
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./tmp/cc-test-reporter upload-coverage -i tmp/codeclimate.backend.json
 
       - run:
           name: Rubocop
