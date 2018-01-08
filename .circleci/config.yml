@@ -41,9 +41,22 @@ jobs:
             bundle exec rake db:structure:load
 
       - run:
-          name: Parallel RSpec
-          command: bin/rails test
+          name: RSpec
+          command: bundle exec rake spec
 
-      # Save artifacts
-      - store_test_results:
-          path: /tmp/test-results
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop -DR
+
+      - run:
+          name: Run heroku setup script
+          command: bash .circleci/setup-heroku.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "a4:23:b1:1a:57:f9:de:e6:c0:f6:7e:92:9c:1e:b0:b9"
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push --force git@heroku.com:staging-swarga.git HEAD:refs/heads/master
+            heroku run python manage.py deploy
+            heroku restart
