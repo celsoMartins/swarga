@@ -102,21 +102,37 @@ RSpec.describe CampingGroupsController, type: :controller do
       it 'instatiates the instance variable and renders the template' do
         get :new
         expect(assigns(:camping_group)).to be_a_new CampingGroup
+        expect(assigns(:new_vehicle)).to be_a_new Vehicle
+        expect(assigns(:person)).to be_a_new Person
         expect(response).to render_template :new
       end
     end
 
     describe 'POST #create' do
       context 'with valid parameters' do
+        let(:camping_groups_attributes) { { tent_numbers: 234, price_per_person: 10, price_total: 100, start_date: Time.zone.today, end_date: Time.zone.tomorrow } }
+        let(:person_attributes) { [full_name: 'bla', document_number: '2342342', phone: '342324', courtesy: true] }
+        let(:vehicle_attributes) { [license_plate: 'xpto-3333', vehicle_type: 'car'] }
+        subject(:created_camping_group) { CampingGroup.last }
+        subject(:created_person) { Person.last }
+        subject(:created_vehicle) { Vehicle.last }
         it 'creates the camping group as reserved and redirects to index' do
-          post :create, params: { camping_group: { tent_numbers: 234, price_per_person: 10, price_total: 100, start_date: Time.zone.today, end_date: Time.zone.tomorrow } }
-          expect(response).to redirect_to camping_groups_path
-          created_camping_group = CampingGroup.last
+          post :create, params: { camping_group: camping_groups_attributes.merge(people_attributes: person_attributes).merge(vehicles_attributes: vehicle_attributes) }
+          expect(response).to redirect_to camping_group_path(created_camping_group)
+
           expect(created_camping_group.tent_numbers).to eq [234]
           expect(created_camping_group.price_per_person).to eq 10
           expect(created_camping_group.price_total).to eq 100
-          expect(created_camping_group.people.count).to eq 0
-          expect(created_camping_group.vehicles.count).to eq 0
+          expect(created_camping_group.people.count).to eq 1
+          expect(created_camping_group.vehicles.count).to eq 1
+
+          expect(created_person.full_name).to eq 'bla'
+          expect(created_person.document_number).to eq '2342342'
+          expect(created_person.phone).to eq '342324'
+          expect(created_person.courtesy).to be true
+
+          expect(created_vehicle.license_plate).to eq 'xpto-3333'
+          expect(created_vehicle.vehicle_type).to eq 'car'
         end
       end
       context 'with invalid parameters' do
@@ -124,7 +140,7 @@ RSpec.describe CampingGroupsController, type: :controller do
           post :create, params: { camping_group: { tent_numbers: nil } }
           expect(response).to render_template :new
           expect(CampingGroup.last).to be_nil
-          expect(assigns(:camping_group).errors.full_messages).to eq ['Números das barracas não pode ficar em branco', 'Data de entrada não pode ficar em branco', 'Data de saída não pode ficar em branco']
+          expect(assigns(:camping_group).errors.full_messages).to eq ['Número da barraca não pode ficar em branco', 'Data de entrada não pode ficar em branco', 'Data de saída não pode ficar em branco', 'Preço total Pelo menos um preço deve ser definido', 'Preço por pessoa Pelo menos um preço deve ser definido']
         end
       end
     end
@@ -214,7 +230,7 @@ RSpec.describe CampingGroupsController, type: :controller do
         it 'does not update the camping group and re-render the form with errors' do
           put :update, params: { id: camping_group, camping_group: { tent_numbers: nil } }
           expect(response).to render_template :edit
-          expect(assigns(:camping_group).errors.full_messages).to eq ['Números das barracas não pode ficar em branco']
+          expect(assigns(:camping_group).errors.full_messages).to eq ['Número da barraca não pode ficar em branco']
         end
       end
     end

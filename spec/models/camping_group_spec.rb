@@ -9,9 +9,31 @@ RSpec.describe CampingGroup, type: :model do
   end
 
   context 'validations' do
-    it { is_expected.to validate_presence_of :tent_numbers }
-    it { is_expected.to validate_presence_of :start_date }
-    it { is_expected.to validate_presence_of :end_date }
+    context 'simple ones' do
+      it { is_expected.to validate_presence_of :tent_numbers }
+      it { is_expected.to validate_presence_of :start_date }
+      it { is_expected.to validate_presence_of :end_date }
+    end
+    context 'complex ones' do
+      describe 'some_price_present?' do
+        context 'having no price defined' do
+          let(:camping_group) { Fabricate.build :camping_group, price_per_person: nil, price_total: nil }
+          it 'expect to not be valid' do
+            expect(camping_group.valid?).to be false
+            expect(camping_group.errors[:price_per_person]).to eq [I18n.t('camping_group.validations.no_price')]
+            expect(camping_group.errors[:price_total]).to eq [I18n.t('camping_group.validations.no_price')]
+          end
+        end
+        context 'having price_total defined' do
+          let(:camping_group) { Fabricate.build :camping_group, price_per_person: nil, price_total: 10 }
+          it { expect(camping_group.valid?).to be true }
+        end
+        context 'having price_per_person defined' do
+          let(:camping_group) { Fabricate.build :camping_group, price_per_person: 10, price_total: nil }
+          it { expect(camping_group.valid?).to be true }
+        end
+      end
+    end
   end
 
   context 'enums' do
@@ -27,9 +49,38 @@ RSpec.describe CampingGroup, type: :model do
       it { expect(CampingGroup.leaving).to eq [past, other_leaving, leaving] }
     end
 
-    pending '.reserved_active'
-    pending '.paid_active'
-    pending '.for_term'
+    describe '.reserved_active' do
+      let!(:reserved) { Fabricate :camping_group, status: :reserved, start_date: 1.day.ago, end_date: 2.days.from_now }
+      let!(:other_reserved) { Fabricate :camping_group, status: :reserved, start_date: 3.days.ago, end_date: 1.day.from_now }
+      let!(:reserved_past) { Fabricate :camping_group, status: :reserved, start_date: 2.days.ago, end_date: 1.day.ago }
+      let!(:reserved_now) { Fabricate :camping_group, status: :reserved, end_date: Time.zone.today }
+      it { expect(CampingGroup.reserved_active).to eq [other_reserved, reserved] }
+    end
+
+    describe '.paid_active' do
+      let!(:reserved) { Fabricate :camping_group, status: :paid, start_date: 1.day.ago, end_date: 2.days.from_now }
+      let!(:other_reserved) { Fabricate :camping_group, status: :paid, start_date: 3.days.ago, end_date: 1.day.from_now }
+      let!(:reserved_past) { Fabricate :camping_group, status: :paid, start_date: 2.days.ago, end_date: 1.day.ago }
+      let!(:reserved_now) { Fabricate :camping_group, status: :paid, end_date: Time.zone.today }
+      it { expect(CampingGroup.paid_active).to eq [other_reserved, reserved] }
+    end
+
+    describe '.for_term' do
+      context 'search by name' do
+        let(:person) { Fabricate.build :person, full_name: 'test name' }
+        let(:other_person) { Fabricate.build :person, full_name: 'other name' }
+        let!(:reserved) { Fabricate :camping_group, status: :reserved, start_date: 1.day.ago, end_date: 2.days.from_now, people: [person] }
+        let!(:paid) { Fabricate :camping_group, status: :paid, start_date: 1.day.ago, end_date: 2.days.from_now, people: [other_person] }
+        it { expect(CampingGroup.for_term('tEsT')).to eq [reserved] }
+        it { expect(CampingGroup.for_term('oTHer')).to eq [paid] }
+      end
+      context 'search by tent_number' do
+        let!(:tent_21_30) { Fabricate :camping_group, tent_numbers: [21, 30] }
+        let!(:tent_40_50) { Fabricate :camping_group, tent_numbers: [40, 50] }
+        it { expect(CampingGroup.for_term('21')).to eq [tent_21_30] }
+        it { expect(CampingGroup.for_term('50')).to eq [tent_40_50] }
+      end
+    end
   end
 
   describe '#unpaid_leaving?' do

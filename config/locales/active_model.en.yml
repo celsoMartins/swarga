@@ -80,3 +80,6 @@ en:
             reserved: Reserved
             paid: Paid
             left: Left
+  camping_group:
+    validations:
+      no_price: "At least one price must be defined"

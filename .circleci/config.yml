@@ -1,0 +1,62 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/swarga
+    docker:
+      - image: circleci/ruby:2.4.3-node
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:10.1-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle-test_test
+    steps:
+      - checkout
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - swarga-{{ checksum "Gemfile.lock" }}
+            - swarga-
+
+      # Bundle install dependencies
+      - run:
+          name: Install dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+
+      - run: sudo apt install postgresql-client
+
+      # Store bundle cache
+      - save_cache:
+          key: swarga-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:structure:load
+
+      - run:
+          name: RSpec
+          command: bundle exec rake spec
+
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop -DR
+
+      - run:
+          name: Run heroku setup script
+          command: bash .circleci/setup-heroku.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "a4:23:b1:1a:57:f9:de:e6:c0:f6:7e:92:9c:1e:b0:b9"
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push --force git@heroku.com:staging-swarga.git HEAD:refs/heads/master
+            heroku run python manage.py deploy
+            heroku restart

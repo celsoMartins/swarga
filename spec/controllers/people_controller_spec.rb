@@ -64,7 +64,7 @@ RSpec.describe PeopleController, type: :controller do
             post :create, params: { camping_group_id: camping_group, person: { foo: 'bar' } }
             expect(response).to render_template :new
             expect(Person.last).to be_nil
-            expect(assigns(:person).errors.full_messages).to eq ['Nome não pode ficar em branco']
+            expect(assigns(:person).errors.full_messages).to eq ['Nome não pode ficar em branco', 'Número do Documento não pode ficar em branco']
           end
         end
         context 'and passing an invalid camping group' do

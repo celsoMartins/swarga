@@ -1,17 +1,26 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-header">
-      <span><%= link_to '< Voltar', camping_groups_path %></span>
-      <h1><%= t('camping_groups.show.title') %></h1>
-      <h4><%= "#{CampingGroup.human_attribute_name(:start_date)}: #{l(@camping_group.start_date)}"%></h4>
-      <h4><%= "#{CampingGroup.human_attribute_name(:end_date)}: #{l(@camping_group.end_date)}"%></h4>
-      <h4><%= "#{CampingGroup.human_attribute_name(:price_per_person)}: #{number_to_currency(@camping_group.price_per_person)}"%></h4>
-      <h4><%= "#{CampingGroup.human_attribute_name(:price_total)}: #{number_to_currency(@camping_group.calculated_total)}"%></h4>
+    <div class="col-xs-12 swarga-header">
+      <ul class="breadcrumb">
+        <li><%= link_to CampingGroup.model_name.human(count: 2), camping_groups_path %></li>
+        <li><%= t('camping_groups.show.title') %></li>
+      </ul>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-header">
+    <div class="col-xs-12 swarga-subtitle">
+      <span class="col-xs-3 stamp"><%= "#{CampingGroup.human_attribute_name(:tent_numbers, count: 1)}: #{@camping_group.tent_numbers.join(', ')}"%></span>
+      <span class="col-xs-2 stamp"><%= "#{CampingGroup.human_attribute_name(:start_date)}: #{l(@camping_group.start_date)}"%></span>
+      <span class="col-xs-2 stamp"><%= "#{CampingGroup.human_attribute_name(:end_date)}: #{l(@camping_group.end_date)}"%></span>
+      <span class="col-xs-2 stamp"><%= "#{CampingGroup.human_attribute_name(:price_per_person)}: #{number_to_currency(@camping_group.price_per_person)}"%></span>
+      <span class="col-xs-2 stamp"><%= "#{CampingGroup.human_attribute_name(:price_total)}: #{number_to_currency(@camping_group.calculated_total)}"%></span>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
       <h2><%= t('people.index.title') %></h2>
       <table class="table">
         <th><%= Person.human_attribute_name(:full_name) %></th>
@@ -41,17 +50,17 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-header">
+    <div class="col-xs-12">
       <h2><%= t('vehicles.index.title') %></h2>
       <table class="table">
         <th><%= Vehicle.human_attribute_name(:license_plate) %></th>
         <th><%= Vehicle.human_attribute_name(:vehicle_type) %></th>
         <tbody>
         <% @camping_group.vehicles.each do |vehicle| %>
-            <tr>
-              <td><%= vehicle.license_plate %></td>
-              <td><%= t("activerecord.attributes.vehicle.enums.vehicle_types.#{vehicle.vehicle_type}") %></td>
-            </tr>
+          <tr>
+            <td><%= vehicle.license_plate %></td>
+            <td><%= t("activerecord.attributes.vehicle.enums.vehicle_types.#{vehicle.vehicle_type}") %></td>
+          </tr>
         <% end %>
         </tbody>
       </table>

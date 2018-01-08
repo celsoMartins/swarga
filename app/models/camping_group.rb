@@ -19,14 +19,18 @@ class CampingGroup < ApplicationRecord
   enum status: { reserved: 0, paid: 1, left: 2 }
 
   has_many :people, dependent: :restrict_with_exception
-  has_many :vehicles, dependent: :restrict_with_exception
+  accepts_nested_attributes_for :people, reject_if: :all_blank
 
-  scope :reserved_active, -> { reserved.where('end_date > ?', Time.zone.today) }
+  has_many :vehicles, dependent: :restrict_with_exception
+  accepts_nested_attributes_for :vehicles, reject_if: :all_blank
+
+  scope :reserved_active, -> { reserved.where('end_date > ?', Time.zone.today).order(:end_date) }
   scope :paid_active, -> { paid.where('end_date > ?', Time.zone.today).order(:end_date) }
   scope :leaving, -> { where('end_date <= ? AND camping_groups.status <> ?', Time.zone.today, CampingGroup.statuses[:left]).order(:end_date, :start_date) }
   scope :for_term, ->(term) { includes(:people).where('(UPPER(full_name) LIKE :search_name) OR (:search_tent = ANY(tent_numbers))', search_name: "%#{term&.upcase}%", search_tent: term.to_i).references(:people) }
 
   validates :tent_numbers, :start_date, :end_date, presence: true
+  validate :some_price_present?
 
   def unpaid_leaving?
     reserved? && end_date <= Time.zone.today
@@ -43,5 +47,13 @@ class CampingGroup < ApplicationRecord
 
   def qty_nights
     (end_date - start_date).to_i
+  end
+
+  private
+
+  def some_price_present?
+    return true if price_total.present? || price_per_person.present?
+    errors.add(:price_total, I18n.t('camping_group.validations.no_price'))
+    errors.add(:price_per_person, I18n.t('camping_group.validations.no_price'))
   end
 end

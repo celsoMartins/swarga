@@ -16,11 +16,13 @@ class CampingGroupsController < AuthenticatedController
 
   def new
     @camping_group = CampingGroup.new
+    build_camping_group
   end
 
   def create
     @camping_group = CampingGroup.new(camping_group_params.merge(tent_numbers: tent_numbers))
-    return redirect_to camping_groups_path if @camping_group.save
+    return redirect_to camping_group_path(@camping_group) if @camping_group.save
+    build_camping_group
     render :new
   end
 
@@ -46,8 +48,16 @@ class CampingGroupsController < AuthenticatedController
 
   private
 
+  def build_camping_group
+    @camping_group.people.build if @camping_group.people.blank?
+    @person ||= @camping_group.people.last
+    @camping_group.vehicles.build if @camping_group.vehicles.blank?
+    @new_vehicle ||= @camping_group.vehicles.last
+    @new_vehicle.vehicle_type = nil
+  end
+
   def camping_group_params
-    params.require(:camping_group).permit(:tent_numbers, :price_per_person, :price_total, :start_date, :end_date)
+    params.require(:camping_group).permit(:tent_numbers, :price_per_person, :price_total, :start_date, :end_date, people_attributes: %i[full_name document_number phone courtesy], vehicles_attributes: %i[license_plate vehicle_type])
   end
 
   def tent_numbers

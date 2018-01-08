@@ -37,10 +37,7 @@ en:
       leaving_today:
         title: "Leaving today (%{value})"
       left:
-        title:
-          one: "No finished groups"
-          one: "1 finished group"
-          other: "%{count} finished groups"
+        title: "Left groups (%{value})"
       nights: "Nights"
     new:
       title: "New camping group"
