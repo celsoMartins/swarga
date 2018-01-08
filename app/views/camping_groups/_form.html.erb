@@ -1,37 +1,55 @@
-<div class="row">
-  <div class='col-xs-12 form-group <%= 'has-error' if @camping_group.errors[:tent_number].present? %>'>
-    <%= f.label :tent_numbers, class: 'control-label' %>
-    <%= f.text_field :tent_numbers, value: @camping_group.tent_numbers&.join(','), autofocus: true, class: 'form-control' %>
-    <span class="help-block"><%= @camping_group.errors[:tent_number].join(', ') %></span>
+<div class="list-table">
+  <h2><%= t('camping_groups.new.main_form.title') %></h2>
+
+  <div class="row">
+    <div class='col-xs-4 form-group <%= 'has-error' if @camping_group.errors[:tent_numbers].present? %>'>
+      <%= f.label :tent_numbers, class: 'control-label' %>
+      <%= f.text_field :tent_numbers, value: @camping_group.tent_numbers&.join(','), autofocus: true, class: 'form-control' %>
+      <span class="help-block"><%= @camping_group.errors[:tent_numbers].join(', ') %></span>
+    </div>
+
+    <div class='col-xs-4 form-group <%= 'has-error' if @camping_group.errors[:start_date].present? %>'>
+      <%= f.label :start_date, class: 'control-label' %>
+      <%= f.date_field :start_date, class: 'form-control' %>
+      <span class="help-block"><%= @camping_group.errors[:start_date].join(', ') %></span>
+    </div>
+
+    <div class='col-xs-4 form-group <%= 'has-error' if @camping_group.errors[:end_date].present? %>'>
+      <%= f.label :end_date, class: 'control-label' %>
+      <%= f.date_field :end_date, class: 'form-control' %>
+      <span class="help-block"><%= @camping_group.errors[:end_date].join(', ') %></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class='col-xs-6 form-group <%= 'has-error' if @camping_group.errors[:price_per_person].present? %>'>
+      <%= f.label :price_per_person, class: 'control-label' %>
+      <%= f.text_field :price_per_person, class: 'form-control' %>
+      <span class="help-block"><%= @camping_group.errors[:price_per_person].join(', ') %></span>
+    </div>
+
+    <div class='col-xs-6 form-group <%= 'has-error' if @camping_group.errors[:price_total].present? %>'>
+      <%= f.label :price_total, class: 'control-label' %>
+      <%= f.text_field :price_total, class: 'form-control' %>
+      <span class="help-block"><%= @camping_group.errors[:price_total].join(', ') %></span>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class='col-xs-12 form-group <%= 'has-error' if @camping_group.errors[:start_date].present? %>'>
-    <%= f.label :start_date, class: 'control-label' %>
-    <%= f.date_field :start_date, class: 'form-control' %>
-    <span class="help-block"><%= @camping_group.errors[:start_date].join(', ') %></span>
-  </div>
-</div>
+<% unless @camping_group.persisted? %>
+  <div class="list-table">
+    <h2><%= t('people.index.title') %></h2>
 
-<div class="row">
-  <div class='col-xs-12 form-group <%= 'has-error' if @camping_group.errors[:end_date].present? %>'>
-    <%= f.label :end_date, class: 'control-label' %>
-    <%= f.date_field :end_date, class: 'form-control' %>
-    <span class="help-block"><%= @camping_group.errors[:end_date].join(', ') %></span>
+    <%= f.fields_for :people do |form_person| %>
+      <%= render 'people/person_fields', f: form_person %>
+    <% end %>
   </div>
-</div>
 
-<div class="row">
-  <div class='col-xs-12 form-group'>
-    <%= f.label :price_per_person, class: 'control-label' %>
-    <%= f.text_field :price_per_person, class: 'form-control' %>
-  </div>
-</div>
+  <div class="list-table">
+    <h2><%= t('vehicles.index.title') %></h2>
 
-<div class="row">
-  <div class='col-xs-12 form-group'>
-    <%= f.label :price_total, class: 'control-label' %>
-    <%= f.text_field :price_total, class: 'form-control' %>
+    <%= f.fields_for :vehicles do |form_vehicle| %>
+      <%= render 'vehicles/vehicle_fields', f: form_vehicle %>
+    <% end %>
   </div>
-</div>
+<% end %>

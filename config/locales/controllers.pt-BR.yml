@@ -34,10 +34,7 @@ pt-BR:
       leaving_today:
         title: "Saindo hoje (%{value})"
       left:
-        title:
-          zero: "Nenhum grupo encerrado"
-          one: "1 grupo encerrado"
-          other: "%{count} grupos encerrados"
+        title: "Grupos encerrados (%{value})"
       nights: "Noites"
     new:
       title: "Novo Grupo de Camping"

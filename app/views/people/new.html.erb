@@ -1,13 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-header">
-      <h1><%= t('people.new.title') %></h1>
-      <span><%= link_to '< Voltar', camping_group_path(@camping_group) %></span>
+    <div class="col-xs-12">
+      <ul class="breadcrumb">
+        <li><%= link_to CampingGroup.model_name.human(count: 2), camping_groups_path %></li>
+        <li><%= link_to "#{CampingGroup.model_name.human} (#{@camping_group.tent_numbers.join(', ')})", camping_group_path(@camping_group) %></li>
+        <li><%= t('people.new.title') %></li>
+      </ul>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-xs-8 col-xs-offset-2 swarga-header">
+    <div class="col-xs-12 swarga-header">
       <%= form_for @person, url: camping_group_people_path(@camping_group) do |f| %>
         <%= render 'form', f: f %>
       <% end %>

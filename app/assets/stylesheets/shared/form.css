@@ -1,8 +1,9 @@
 .swarga-header {
-    background-color: #f3f6fc;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
+    background-color: transparent;
+}
+
+.swarga-subtitle {
+    font-size: small;
 }
 
 .help-block {
@@ -26,6 +27,16 @@
     text-transform: uppercase;
 }
 
-.spaced-botton-component {
+.botton-spaced-component {
     margin-bottom: 8px;
+}
+
+h1 {
+    font-size: x-large;
+}
+
+h2 {
+    font-size: large;
+    margin-bottom: 15px;
+    font-weight: bold;
 }

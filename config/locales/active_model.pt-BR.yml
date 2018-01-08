@@ -78,7 +78,9 @@ pt-BR:
         password_confirmation: Confirmação de senha
         remember_me: Lembrar
       camping_group:
-        tent_numbers: Números das barracas
+        tent_numbers:
+          one: Número da barraca
+          other: Números das barracas
         price_per_person: Preço por pessoa
         price_total: Preço total
         start_date: Data de entrada
@@ -101,3 +103,6 @@ pt-BR:
             car: Carro
             moto: Moto
             motor_home: Motor Home
+  camping_group:
+    validations:
+      no_price: "Pelo menos um preço deve ser definido"

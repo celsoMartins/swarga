@@ -7,6 +7,7 @@ RSpec.describe Person, type: :model do
 
   context 'validations' do
     it { is_expected.to validate_presence_of :full_name }
+    it { is_expected.to validate_presence_of :document_number }
   end
 
   context 'scopes' do

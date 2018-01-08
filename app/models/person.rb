@@ -25,5 +25,5 @@ class Person < ApplicationRecord
 
   scope :billable, -> { where(courtesy: false) }
 
-  validates :full_name, presence: true
+  validates :full_name, :document_number, presence: true
 end

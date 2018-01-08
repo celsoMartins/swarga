@@ -9,9 +9,31 @@ RSpec.describe CampingGroup, type: :model do
   end
 
   context 'validations' do
-    it { is_expected.to validate_presence_of :tent_numbers }
-    it { is_expected.to validate_presence_of :start_date }
-    it { is_expected.to validate_presence_of :end_date }
+    context 'simple ones' do
+      it { is_expected.to validate_presence_of :tent_numbers }
+      it { is_expected.to validate_presence_of :start_date }
+      it { is_expected.to validate_presence_of :end_date }
+    end
+    context 'complex ones' do
+      describe 'some_price_present?' do
+        context 'having no price defined' do
+          let(:camping_group) { Fabricate.build :camping_group, price_per_person: nil, price_total: nil }
+          it 'expect to not be valid' do
+            expect(camping_group.valid?).to be false
+            expect(camping_group.errors[:price_per_person]).to eq [I18n.t('camping_group.validations.no_price')]
+            expect(camping_group.errors[:price_total]).to eq [I18n.t('camping_group.validations.no_price')]
+          end
+        end
+        context 'having price_total defined' do
+          let(:camping_group) { Fabricate.build :camping_group, price_per_person: nil, price_total: 10 }
+          it { expect(camping_group.valid?).to be true }
+        end
+        context 'having price_per_person defined' do
+          let(:camping_group) { Fabricate.build :camping_group, price_per_person: 10, price_total: nil }
+          it { expect(camping_group.valid?).to be true }
+        end
+      end
+    end
   end
 
   context 'enums' do
