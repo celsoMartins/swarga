@@ -2,6 +2,8 @@ version: 2
 jobs:
   build:
     working_directory: ~/swarga
+    environment:
+      CC_TEST_REPORTER_ID: 8ba7be48e9cdca646e8f031c2264d2c403d532e1020ae463bad4e68c81e67b23
     docker:
       - image: circleci/ruby:2.4.3-node
         environment:
@@ -41,9 +43,9 @@ jobs:
             bundle exec rake db:structure:load
 
       - run:
-          name: Parallel RSpec
-          command: bin/rails test
+          name: RSpec
+          command: bundle exec rake spec
 
-      # Save artifacts
-      - store_test_results:
-          path: /tmp/test-results
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop -DR
