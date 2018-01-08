@@ -18,7 +18,6 @@ gem 'yui-compressor'
 
 group :test, :development do
   gem 'brakeman'
-  gem 'codeclimate-test-reporter'
   gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
@@ -27,7 +26,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'shoulda-matchers'
-  gem 'simplecov', '0.15.1', require: false
+  gem 'simplecov', require: false
 end
 
 group :development do
